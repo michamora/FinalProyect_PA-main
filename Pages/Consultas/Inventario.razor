@@ -50,7 +50,6 @@
             {
                 @foreach (var item in lista)
                 {
-                    Fecha = DateOnly.FromDateTime(item.FechaCreacion);
                     descripcion = categoriaBLL.Buscar(item.CategoriaId);
                     if (descripcion == null) break;
                     <tr class="text-center">
@@ -66,7 +65,7 @@
 
                         <td class="border border-3">RD$ @item.Precio</td>
 
-                        <td class="border border-3">@Fecha</td>
+                        <td class="border border-3">@item.FechaCreacion.ToString("dd/MM/yyyy")</td>
 
                         <td class="border border-3">
                             <a class="btn btn-sm btn-outline-success oi oi-eye"
