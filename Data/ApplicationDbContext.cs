@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using Models;
+using ProyectoFinal.Models;
 
 #nullable disable // Para quitar el aviso de nulls
 

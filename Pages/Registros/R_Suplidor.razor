@@ -10,7 +10,7 @@
 
 @using BLL
 
-<EditForm Model="suplidor" OnValidSubmit="Guardar">
+<EditForm Model="suplidor" OnValidSubmit="Guardar" >
     <DataAnnotationsValidator/>
 
     <div class="card shadow-lg">
@@ -36,7 +36,8 @@
 
                     <div class="form-group col-3">
                         <label>Nombre Suplidor</label>
-                        <InputText @bind-Value="suplidor.Nombre" placeholder="Nombre Suplidor" class="form-control"/>
+                        <InputText @bind-Value="suplidor.Nombre" placeholder="Nombre Suplidor" class="form-control" 
+                    />
                         <ValidationMessage For="@(() => suplidor.Nombre)"/>
                     </div>
 
@@ -48,7 +49,8 @@
                             Dirección
                             <div class="oi oi-map-marker"></div>
                         </label>
-                        <InputText @bind-Value="suplidor.Direccion" placeholder="Dirección" class="form-control"/>
+                        <InputText @bind-Value="suplidor.Direccion" placeholder="Dirección" class="form-control"
+                                />
                         <ValidationMessage For="@(() => suplidor.Direccion)"/>
                     </div>
 
@@ -90,7 +92,7 @@
                         <div class="form-group col-3">
                             <label>Descripción Articulo</label>
                             <InputText @bind-Value="suplidor.DescripcionArticulo" placeholder="Descripción Articulo"
-                                       class="form-control"/>
+                                       class="form-control" />
                             <ValidationMessage For="@(() => suplidor.DescripcionArticulo)"/>
                         </div>
 
@@ -146,7 +148,7 @@
 @code
 {
 
-#nullable disable // Para quitar el aviso de nulls
+    #nullable disable // Para quitar el aviso de nulls
 
     Suplidor suplidor = new Suplidor();
 
@@ -160,7 +162,7 @@
 
     //-----------------------------------------------------------------------
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         suplidor = new Suplidor();
 
@@ -242,4 +244,4 @@
         else
             Toast.ShowError("No fue posible eliminar");
     }
-    } 
+} 

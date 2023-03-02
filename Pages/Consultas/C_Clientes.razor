@@ -114,7 +114,6 @@
             {
                 @foreach (var item in lista)
                 {
-                    Fecha = DateOnly.FromDateTime(item.FechaNacimiento);
                     <tr>
                         <td>@item.ClienteId</td>
 
@@ -130,8 +129,7 @@
 
                         <td>@item.Cedula</td>
 
-                        <td>@Fecha</td>
-
+                        <td>@item.FechaNacimiento.ToString("dd/MM/yyyy")</td>
 
                         <td>
                             <a class="btn btn-sm btn-outline-success oi oi-eye" href="clientes/@item.ClienteId"></a>

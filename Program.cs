@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using ProyectoFinal.Areas.Identity;
 using ProyectoFinal.Data;
 using Blazored.Toast;
-using Models;
+using ProyectoFinal.Models;
 using ProyectoFinal.BLL;
 using System;
 using System.Collections.Generic;

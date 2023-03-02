@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Models;
+using ProyectoFinal.Models;
 using ProyectoFinal.Data;
 using System;
 using System.Collections.Generic;
