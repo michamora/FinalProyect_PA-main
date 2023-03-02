@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using Models;
+using ProyectoFinal.Models;
 
 namespace ProyectoFinal.Areas.Identity.Pages.Account
 {

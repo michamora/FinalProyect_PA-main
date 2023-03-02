@@ -5,9 +5,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
+
 #nullable disable // Para quitar el aviso de nulls
- 
-namespace Models  
+
+namespace ProyectoFinal.Models  
 {
     public class Articulo // Entidad Articulo
     {

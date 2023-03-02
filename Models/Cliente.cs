@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable // Para quitar el aviso de nulls
  
-namespace Models  
+namespace ProyectoFinal.Models  
 {
     public class Clientes // Entidad clientes
     {

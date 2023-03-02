@@ -147,7 +147,7 @@ namespace ProyectoFinal.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Models.Articulo", b =>
+            modelBuilder.Entity("ProyectoFinal.Models.Articulo", b =>
                 {
                     b.Property<int>("ArticuloId")
                         .ValueGeneratedOnAdd()
@@ -171,9 +171,6 @@ namespace ProyectoFinal.Migrations
                     b.Property<float>("ITBIS")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("NewArticuloId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -191,7 +188,7 @@ namespace ProyectoFinal.Migrations
                     b.ToTable("Articulo");
                 });
 
-            modelBuilder.Entity("Models.Categoria", b =>
+            modelBuilder.Entity("ProyectoFinal.Models.Categoria", b =>
                 {
                     b.Property<int>("CategoriaId")
                         .ValueGeneratedOnAdd()
@@ -241,7 +238,7 @@ namespace ProyectoFinal.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Models.Clientes", b =>
+            modelBuilder.Entity("ProyectoFinal.Models.Clientes", b =>
                 {
                     b.Property<int>("ClienteId")
                         .ValueGeneratedOnAdd()
@@ -285,7 +282,7 @@ namespace ProyectoFinal.Migrations
                     b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("Models.Pago", b =>
+            modelBuilder.Entity("ProyectoFinal.Models.Pago", b =>
                 {
                     b.Property<int>("PagoId")
                         .ValueGeneratedOnAdd()
@@ -323,7 +320,7 @@ namespace ProyectoFinal.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Models.Suplidor", b =>
+            modelBuilder.Entity("ProyectoFinal.Models.Suplidor", b =>
                 {
                     b.Property<int>("SuplidorId")
                         .ValueGeneratedOnAdd()
@@ -363,7 +360,7 @@ namespace ProyectoFinal.Migrations
                     b.ToTable("Suplidor");
                 });
 
-            modelBuilder.Entity("Models.Usuarios", b =>
+            modelBuilder.Entity("ProyectoFinal.Models.Usuarios", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -428,7 +425,7 @@ namespace ProyectoFinal.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Models.Ventas", b =>
+            modelBuilder.Entity("ProyectoFinal.Models.Ventas", b =>
                 {
                     b.Property<int>("VentaId")
                         .ValueGeneratedOnAdd()
@@ -474,7 +471,7 @@ namespace ProyectoFinal.Migrations
                     b.ToTable("Ventas");
                 });
 
-            modelBuilder.Entity("Models.VentasDetalle", b =>
+            modelBuilder.Entity("ProyectoFinal.Models.VentasDetalle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -494,9 +491,6 @@ namespace ProyectoFinal.Migrations
 
                     b.Property<decimal>("Importe")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("NewArticuloId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<int>("PagoId")
                         .HasColumnType("INTEGER");
@@ -530,7 +524,7 @@ namespace ProyectoFinal.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("Models.Usuarios", null)
+                    b.HasOne("ProyectoFinal.Models.Usuarios", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -539,7 +533,7 @@ namespace ProyectoFinal.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("Models.Usuarios", null)
+                    b.HasOne("ProyectoFinal.Models.Usuarios", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -554,7 +548,7 @@ namespace ProyectoFinal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Models.Usuarios", null)
+                    b.HasOne("ProyectoFinal.Models.Usuarios", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -563,16 +557,16 @@ namespace ProyectoFinal.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("Models.Usuarios", null)
+                    b.HasOne("ProyectoFinal.Models.Usuarios", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Models.Articulo", b =>
+            modelBuilder.Entity("ProyectoFinal.Models.Articulo", b =>
                 {
-                    b.HasOne("Models.Categoria", "Categoria")
+                    b.HasOne("ProyectoFinal.Models.Categoria", "Categoria")
                         .WithMany()
                         .HasForeignKey("CategoriaId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -581,24 +575,24 @@ namespace ProyectoFinal.Migrations
                     b.Navigation("Categoria");
                 });
 
-            modelBuilder.Entity("Models.Ventas", b =>
+            modelBuilder.Entity("ProyectoFinal.Models.Ventas", b =>
                 {
-                    b.HasOne("Models.Pago", "Pago")
+                    b.HasOne("ProyectoFinal.Models.Pago", "Pago")
                         .WithMany()
                         .HasForeignKey("PagoId");
 
                     b.Navigation("Pago");
                 });
 
-            modelBuilder.Entity("Models.VentasDetalle", b =>
+            modelBuilder.Entity("ProyectoFinal.Models.VentasDetalle", b =>
                 {
-                    b.HasOne("Models.Articulo", "articulo")
+                    b.HasOne("ProyectoFinal.Models.Articulo", "articulo")
                         .WithMany("VentasDetalle")
                         .HasForeignKey("ArticuloId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Models.Ventas", "venta")
+                    b.HasOne("ProyectoFinal.Models.Ventas", "venta")
                         .WithMany("ventasDetalle")
                         .HasForeignKey("VentaId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -609,12 +603,12 @@ namespace ProyectoFinal.Migrations
                     b.Navigation("venta");
                 });
 
-            modelBuilder.Entity("Models.Articulo", b =>
+            modelBuilder.Entity("ProyectoFinal.Models.Articulo", b =>
                 {
                     b.Navigation("VentasDetalle");
                 });
 
-            modelBuilder.Entity("Models.Ventas", b =>
+            modelBuilder.Entity("ProyectoFinal.Models.Ventas", b =>
                 {
                     b.Navigation("ventasDetalle");
                 });
