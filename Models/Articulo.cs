@@ -15,6 +15,8 @@ namespace ProyectoFinal.Models
         [Key]  
         public int ArticuloId { get; set; }
 
+        public int SuplidorId { get; set; }
+
         [Required(ErrorMessage = "Ingrese el nombre del articulo.")]
         public string Nombre { get; set; }
         
@@ -44,27 +46,30 @@ namespace ProyectoFinal.Models
         public bool Estado { get; set; } = true;
 
         public int UsuarioId { get; set; }
+        
 
         //-------------------------------------------------------------------------------------
 
         [ForeignKey("CategoriaId")]
         public virtual Categoria Categoria { get; set; }
 
-        [ForeignKey("ArticuloId")]
-        public List<VentasDetalle> VentasDetalle { get; set; }
-        
+        [ForeignKey("SuplidorId")]
+        public virtual Suplidor suplidor { get; set; } 
+
 
         public Articulo()
         {
             ArticuloId = 0;
             UsuarioId = 0; 
+            SuplidorId = 0;
             Nombre = string.Empty;
             FechaCreacion = DateTime.Now;
             Cantidad = 0;
             Costo = 0;
             Precio = 0;
             
-            VentasDetalle = new List<VentasDetalle>();
+    
+            
         }    
         
     }

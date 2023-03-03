@@ -68,9 +68,9 @@
                         <select @bind="ArticuloSeleccionado" class="form-select text-14"
                                 @onfocusout="ObtenerDatosArticulo">
                             <option value="0" disabled selected> Seleccione un articulo </option>
-                            @foreach (Articulo item in ArticuloList)
+                            @foreach (Compra item in CompraList)
                             {
-                                <option value="@item.ArticuloId">@item.Nombre</option>
+                                <option value="@item.CompraId">@item.CompraId</option>
                             }
                         </select>
                     </div>
@@ -121,10 +121,10 @@
                             @foreach (VentasDetalle item in venta.ventasDetalle)
                             {
                                 <tr class="text-center">
-                                    <td>@item.ArticuloId</td>
+                                    <td>@item.CompraId</td>
                                     <td>@item.Descripcion</td>
                                     <td>@item.Cantidad</td>
-                                    <td>RD$ @item.PrecioArticulo</td>
+                                    <td>RD$ @item.PrecioArticuloComprado</td>
                                     <td>RD$ @item.Importe</td>
                                     <td>
                                         <a class="btn-group-sm btn-close btn btn-group-lg btn-outline-danger"
@@ -261,11 +261,13 @@
     VentasDetalle Detalle = new VentasDetalle();
     Articulo articulo = new Articulo();
 
+    Compra compra = new Compra();
+
     public int ArticuloSeleccionado { get; set; }
 
     public int PagoSeleccionado { get; set; }
 
-    public decimal precioArticulo { get; set; }
+    public decimal precioArticuloComprado { get; set; }
 
     public decimal importe { get; set; }
 
@@ -283,6 +285,8 @@
 
     List<Articulo> ArticuloList = new List<Articulo>();
 
+    List<Compra> CompraList = new List<Compra>();
+
     List<Pago> MetodoPagoList = new List<Pago>();
 
 
@@ -295,6 +299,9 @@
     public ArticuloBLL articuloBLL { get; set; } // Inyectando BLLS
 
     [Inject]
+    public CompraBLL compraBLL { get; set; }
+
+    [Inject]
     public ClientesBLL clienteBLL { get; set; }
 
     [Inject]
@@ -305,7 +312,7 @@
 
     protected override void OnInitialized()
     {
-        ArticuloList = articuloBLL.GetList(p => true);
+        CompraList = compraBLL.GetList(p => true);
         ClienteList = clienteBLL.GetList(p => true);
         MetodoPagoList = pagoBLL.GetList(c => true);
 
@@ -319,7 +326,7 @@
     public void Nuevo() // Nueva venta
     {
         cantidad = 0;
-        precioArticulo = 0;
+        precioArticuloComprado = 0;
         descripcion = string.Empty;
         ArticuloSeleccionado = 0;
         SubTotal = 0;
@@ -330,37 +337,37 @@
 
         venta = new Ventas();
         Detalle = new VentasDetalle();
-        ArticuloList = articuloBLL.GetList(p => true);
+        CompraList = compraBLL.GetList(p => true);
         ClienteList = clienteBLL.GetList(p => true);
         MetodoPagoList = pagoBLL.GetList(c => true);
     }
 
     private void ObtenerDatosArticulo() // Obteniendo los datos del articulo seleccionado
     {
-        Articulo auxArticulo = articuloBLL.Buscar(ArticuloSeleccionado);
+        Compra auxCompra = compraBLL.Buscar(ArticuloSeleccionado);
 
-        if (auxArticulo != null)
+        if (auxCompra != null)
         {
-            precioArticulo = auxArticulo.Precio; // Mostrando el precio del articulo seleccionado
-            descripcion = auxArticulo.Nombre; // Obteniendo el nombre del articulo
+            precioArticuloComprado = auxCompra.Precio; // Mostrando el precio del articulo seleccionado
+            //descripcion = auxCompra.ArticuloComprado; // Obteniendo el nombre del articulo
 
-            venta.Existencia = auxArticulo.Cantidad; // Mostrando la cantidad de unidades del articulo seleccionado
+            venta.Existencia = auxCompra.CantidadComprada; // Mostrando la cantidad de unidades del articulo seleccionado
 
-            venta.SubTotal = auxArticulo.Precio * Convert.ToDecimal(Detalle.Cantidad); // Mostrando el subtotal de esa venta
+            venta.SubTotal = auxCompra.Precio * Convert.ToDecimal(Detalle.Cantidad); // Mostrando el subtotal de esa venta
 
             ITBIS = venta.SubTotal * 18 / 100; // Calculo de ITBIS
 
             venta.ITBIS = ITBIS;
 
-            venta.Existencia = auxArticulo.Cantidad - Detalle.Cantidad; // Actualizando cantidad reducida de articulos
+            venta.Existencia = auxCompra.CantidadComprada - Detalle.Cantidad; // Actualizando cantidad reducida de articulos
         }
     }
 
     private void ActualizandoUnidadesArticulo()
     {
-        Articulo auxArticulo = articuloBLL.Buscar(ArticuloSeleccionado);
+        Compra auxCompra = compraBLL.Buscar(ArticuloSeleccionado);
 
-        if (auxArticulo != null)
+        if (auxCompra != null)
         {
             venta.UnidadesVendidas = Detalle.Cantidad; // Las unidades que se vendieron
         }
@@ -369,9 +376,9 @@
 
     private void ObtenerDevuelta() // Devuelta que le sobra al cliente
     {
-        Articulo auxArticulo = articuloBLL.Buscar(ArticuloSeleccionado);
+       Compra auxCompra = compraBLL.Buscar(ArticuloSeleccionado);
 
-        if (auxArticulo != null)
+        if (auxCompra != null)
         {
             if (venta.PagoObtenido > venta.Total)
             {
@@ -514,12 +521,12 @@
         {
             this.venta.ventasDetalle.Add(new VentasDetalle
                 {
-                    ArticuloId = ArticuloSeleccionado,
+                    CompraId = ArticuloSeleccionado,
                     PagoId = PagoSeleccionado,
                     Descripcion = descripcion, // Agregando el detalle
                     Cantidad = Detalle.Cantidad,
-                    PrecioArticulo = precioArticulo,
-                    Importe = precioArticulo * Convert.ToDecimal(Detalle.Cantidad)
+                    PrecioArticuloComprado = precioArticuloComprado,
+                    Importe = precioArticuloComprado * Convert.ToDecimal(Detalle.Cantidad)
                 });
         }
         // MostrarImporte();
@@ -533,24 +540,24 @@
         Toast.ShowInfo("Detalle removido");
         this.venta.ventasDetalle.Remove(item);
 
-        Articulo auxArticulo = articuloBLL.Buscar(ArticuloSeleccionado);
+        Compra auxCompra= compraBLL.Buscar(ArticuloSeleccionado);
 
-        if (auxArticulo != null)
+        if (auxCompra != null)
         {
-            venta.Existencia = auxArticulo.Cantidad;
+            venta.Existencia = auxCompra.CantidadComprada;
         }
     }
 
 
     public void MostrarImporte() // Calculando el Total
     {
-        Articulo auxArticulo = articuloBLL.Buscar(ArticuloSeleccionado);
+        Compra auxCompra= compraBLL.Buscar(ArticuloSeleccionado);
 
-        if (auxArticulo != null)
+        if (auxCompra != null)
         {
-            precioArticulo = auxArticulo.Precio; // Precio del articulo seleccionado
+            precioArticuloComprado = auxCompra.Precio; // Precio del articulo seleccionado
 
-            importe = auxArticulo.Precio * Convert.ToDecimal(Detalle.Cantidad); // Importe, cantidad por precio
+            importe = auxCompra.Precio * Convert.ToDecimal(Detalle.Cantidad); // Importe, cantidad por precio
         }
     }
 
