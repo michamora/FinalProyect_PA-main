@@ -52,7 +52,7 @@ namespace ProyectoFinal.BLL
                 {
                     foreach (var item in ventas.ventasDetalle)
                     {
-                        item.articulo.Cantidad -= item.Cantidad;
+                        item.articulo.CantidadComprada -= item.Cantidad;
                     }
                     Insertado =  contexto.SaveChanges() > 0;
                 }
@@ -75,7 +75,7 @@ namespace ProyectoFinal.BLL
                 {
                     contexto.Entry(item).State = EntityState.Added;
 
-                    item.articulo.Cantidad -= item.Cantidad;
+                    item.articulo.CantidadComprada -= item.Cantidad;
                 }
 
                 contexto.Entry(ventas).State = EntityState.Modified;
@@ -119,7 +119,7 @@ namespace ProyectoFinal.BLL
 
                     foreach (var item in venta.ventasDetalle)
                     {
-                        item.articulo.Cantidad += item.Cantidad;
+                        item.articulo.CantidadComprada += item.Cantidad;
                     }
 
                     venta.Estado = false;

@@ -26,6 +26,36 @@ a, .btn-link {
     border-color: #5286d4;
 }
 
+.btn-ordendecompra {
+    color: #fff;
+    background-color: #8096fa;
+    border-color: #6676c0;
+    border-radius: 10px;
+    
+}
+
+.btn-ordendecompra:hover{
+    color: #fff;
+    background-color: #6070b4;
+    border-color: #5d69a1;
+}
+
+.bg-ordendecompra2 {
+    color: #fff;
+    background-color: #8096fa;
+    
+    border-radius: 10px;
+    
+}
+
+.bg-fondoinventario {
+    
+    background-color: #fcebf9;
+    border-color: #ffd7e6;
+    
+    
+}
+
 .btn-success {
     color: #fff;
     background-color: #18d37c;
@@ -93,7 +123,7 @@ a, .btn-link {
 }
 
 .bg-inventariocolor {
-    color: #2c2c2c;
+    color: #fff;
     background-color: #66c08f;
 }
 
@@ -144,6 +174,48 @@ a, .btn-link {
     border-color: #dd5151;
 }
 
+.bg-fechasColor {
+    background-color: #fcffdf;
+    border-color:  #f3f7cd;
+}
+
+.bg-fechasColor:hover{
+    
+    background-color:  #fcffdf;
+    border-color:  #a6a890;
+}
+
+.bg-Comprascolor {
+    color: #ffffff;
+    background-color: #76b994;
+}
+
+
+.btn-Inventario {
+    color: #fff;
+    background-color: #66c08f;
+    border-color: #2f925b;
+    border-radius: 10px;
+}
+
+.btn-Inventario:hover{
+    color: #fff;
+    background-color: #539772;
+    border-color: #2f925b;
+}
+
+.btn-Comprar {
+    color: #2e2e2e;
+    background-color: #fcfaa5;
+    border-color: #fce169;
+    border-radius: 10px;
+}
+
+.btn-Comprar:hover{
+    color: #2e2e2e;
+    background-color:#fffd88;
+    border-color: #e7d066;
+}
 
 .content {
     padding-top: 1.1rem;

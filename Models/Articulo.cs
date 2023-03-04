@@ -29,7 +29,11 @@ namespace ProyectoFinal.Models
 
         [Required]
         [Range(1, float.MaxValue, ErrorMessage = "Ingrese la cantidad del articulo.")]
-        public double Cantidad { get; set; }
+        public double CantidadRegistrada { get; set; }
+
+        [Required]
+        [Range(1, float.MaxValue, ErrorMessage = "Ingrese la cantidad a comprar del articulo.")]
+        public double CantidadComprada { get; set; }
 
         [Required]
         [Range(minimum: 1, maximum: int.MaxValue, ErrorMessage = "Ingrese un costo mayor a 0.")]
@@ -38,10 +42,6 @@ namespace ProyectoFinal.Models
         [Required]
         [Range(minimum: 1, maximum: int.MaxValue, ErrorMessage = "Ingrese un precio mayor a 0.")]
         public decimal Precio { get; set; }
-
-        [Required(ErrorMessage = "Campo ITBIS es obligatorio.")]
-        [Range(minimum: 1, maximum: int.MaxValue, ErrorMessage = "Seleccione el % de ITBIS.")]
-        public float ITBIS {get; set;}
 
         public bool Estado { get; set; } = true;
 
@@ -62,7 +62,8 @@ namespace ProyectoFinal.Models
             SuplidorId = 0;
             Nombre = string.Empty;
             FechaCreacion = DateTime.Now;
-            Cantidad = 0;
+            CantidadRegistrada = 0;
+            CantidadComprada = 0;
             Costo = 0;
             Precio = 0;
         }     

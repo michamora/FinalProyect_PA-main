@@ -16,13 +16,13 @@ namespace ProyectoFinal.Models
         public int VentaId { get; set; }
      
         public int ClienteId { get; set; }
-            
 
-        public int CompraId { get; set; }
 
         public int PagoId { get; set; }
 
         public int SuplidorId { get; set; }
+
+        public int ArticuloId { get; set; }
         
         public double Cantidad { get; set; }
 
@@ -33,8 +33,6 @@ namespace ProyectoFinal.Models
         public decimal Importe { get; set; }
 
         public virtual Articulo articulo {get; set;}
-
-        public virtual Compra compra {get; set;}
 
         public Ventas venta { get; set; } = new Ventas();
 
@@ -48,22 +46,24 @@ namespace ProyectoFinal.Models
             VentaId = 0;
             ClienteId = 0;
         
-            CompraId = 0;
+        
             SuplidorId = 0;
+            ArticuloId = 0;
             PagoId = 0;
             Cantidad = 0;    
             PrecioArticuloComprado = 0;  
             Descripcion = string.Empty;  
         }
 
-        public VentasDetalle(int id, int ventaId, int clienteId, int suplidorId, int compraId, int pagoid, int cantidad, decimal precioArticuloComprado, string descripcion)
+        public VentasDetalle(int id, int ventaId, int clienteId, int suplidorId, int articuloId, int compraId, int pagoid, int cantidad, decimal precioArticuloComprado, string descripcion)
         {
             Id = id;
             VentaId = ventaId;
             ClienteId = clienteId;
             SuplidorId = suplidorId;
+            ArticuloId = articuloId;
     
-            CompraId = compraId;
+        
             PagoId = pagoid;
             Cantidad = cantidad;
             PrecioArticuloComprado = precioArticuloComprado;

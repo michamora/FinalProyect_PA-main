@@ -153,7 +153,10 @@ namespace ProyectoFinal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Cantidad")
+                    b.Property<double>("CantidadComprada")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("CantidadRegistrada")
                         .HasColumnType("REAL");
 
                     b.Property<int>("CategoriaId")
@@ -167,9 +170,6 @@ namespace ProyectoFinal.Migrations
 
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("TEXT");
-
-                    b.Property<float>("ITBIS")
-                        .HasColumnType("REAL");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -283,42 +283,6 @@ namespace ProyectoFinal.Migrations
                     b.HasKey("ClienteId");
 
                     b.ToTable("Clientes");
-                });
-
-            modelBuilder.Entity("ProyectoFinal.Models.Compra", b =>
-                {
-                    b.Property<int>("CompraId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ArticuloId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("CantidadComprada")
-                        .HasColumnType("REAL");
-
-                    b.Property<bool>("Estado")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("FechaCompra")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("Precio")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("SuplidorId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("CompraId");
-
-                    b.HasIndex("ArticuloId");
-
-                    b.HasIndex("SuplidorId");
-
-                    b.ToTable("Compra");
                 });
 
             modelBuilder.Entity("ProyectoFinal.Models.Pago", b =>
@@ -516,16 +480,13 @@ namespace ProyectoFinal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ArticuloId")
+                    b.Property<int>("ArticuloId")
                         .HasColumnType("INTEGER");
 
                     b.Property<double>("Cantidad")
                         .HasColumnType("REAL");
 
                     b.Property<int>("ClienteId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CompraId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Descripcion")
@@ -549,8 +510,6 @@ namespace ProyectoFinal.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ArticuloId");
-
-                    b.HasIndex("CompraId");
 
                     b.HasIndex("VentaId");
 
@@ -619,25 +578,6 @@ namespace ProyectoFinal.Migrations
                     b.Navigation("Categoria");
                 });
 
-            modelBuilder.Entity("ProyectoFinal.Models.Compra", b =>
-                {
-                    b.HasOne("ProyectoFinal.Models.Articulo", "Articulo")
-                        .WithMany()
-                        .HasForeignKey("ArticuloId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProyectoFinal.Models.Suplidor", "Suplidor")
-                        .WithMany()
-                        .HasForeignKey("SuplidorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Articulo");
-
-                    b.Navigation("Suplidor");
-                });
-
             modelBuilder.Entity("ProyectoFinal.Models.Ventas", b =>
                 {
                     b.HasOne("ProyectoFinal.Models.Pago", "Pago")
@@ -651,11 +591,7 @@ namespace ProyectoFinal.Migrations
                 {
                     b.HasOne("ProyectoFinal.Models.Articulo", "articulo")
                         .WithMany()
-                        .HasForeignKey("ArticuloId");
-
-                    b.HasOne("ProyectoFinal.Models.Compra", "compra")
-                        .WithMany("VentasDetalle")
-                        .HasForeignKey("CompraId")
+                        .HasForeignKey("ArticuloId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -667,14 +603,7 @@ namespace ProyectoFinal.Migrations
 
                     b.Navigation("articulo");
 
-                    b.Navigation("compra");
-
                     b.Navigation("venta");
-                });
-
-            modelBuilder.Entity("ProyectoFinal.Models.Compra", b =>
-                {
-                    b.Navigation("VentasDetalle");
                 });
 
             modelBuilder.Entity("ProyectoFinal.Models.Ventas", b =>

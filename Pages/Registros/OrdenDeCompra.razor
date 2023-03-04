@@ -1,0 +1,343 @@
+@page "/ordencompra"
+
+@page "/ordencompra/{ArticuloId:int}"
+
+@* Orden de compra *@
+
+@inject AuthenticationStateProvider Authentication
+
+@inject IToastService Toast
+
+@using BLL
+
+<EditForm Model="ordencompra" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <a type="button" class="rz-border-radius-4 shadow border border-4 btn-lg btn btn-warning" data-toggle="tooltip"
+       data-placement="right" title="Regresar al registro de compra" href="compras">
+        <i class="oi oi-arrow-circle-left" />
+    </a>
+
+
+    <div class="card-header justify-content-center text-center bg-ordendecompra2">
+        <h3 class="card-title">
+            Orden de Compras
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
+            </svg>
+        </h3>
+    </div>
+    <hr>
+
+    <div class="card-body">
+        <div class="row">
+
+            @*...................... Fecha ......................*@
+
+            <div class="form-group col-3">
+                <label>Fecha</label>
+                <InputDate @bind-Value="articulo.FechaCreacion" class="form-control" />
+            </div>
+
+
+            @*...................... Nombre ......................*@
+
+            <div class="form-group col-3">
+                <label>
+                    Articulo
+                    <div class="oi oi-cart"></div>
+                </label>
+                <select @bind="ArticuloSeleccionado" class="form-select text-14"
+                        @onfocusout="ObtenerDatosArticulo">
+                    <option value="0" disabled selected> Seleccione un articulo </option>
+                    @foreach (Articulo item in ArticuloList)
+                    {
+                        <option value="@item.ArticuloId">@item.Nombre</option>
+                    }
+                </select>
+            </div>
+
+            @*...................... Categoria ......................*@
+
+            <div class="form-group col-md-3">
+                <label>
+                    Suplidor
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+                        <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                    </svg>
+                </label>
+                <select @bind="articulo.SuplidorId" class="form-select text-14">
+                    <option value="0" disabled selected>Seleccione un suplidor</option>
+                    @foreach (Suplidor item in SuplidorList)
+                    {
+                        <option value="@item.SuplidorId">@item.Nombre </option>
+                    }
+                </select>
+            </div>
+
+            @*...................... Cantidad ......................*@
+
+            <div class="form-group col-3">
+                <label>Cantidad</label>
+                <InputNumber @bind-Value="articulo.CantidadComprada" class="form-control" />
+                <ValidationMessage For="@(() => articulo.CantidadComprada)" />
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+
+            <div class="form-group col-3">
+                <label>Costo / Unidad</label>
+                <InputNumber @bind-Value="articulo.Costo" class="form-control" readOnly="true" />
+
+            </div>
+
+            @*...................... Precio ......................*@
+
+            <div class="form-group col-3">
+                <label>Precio</label>
+                <InputNumber @bind-Value="articulo.Precio" class="form-control" />
+                <ValidationMessage For="@(() => articulo.Precio)" />
+            </div>
+
+            @*...................... Botones ......................*@
+
+            <p />
+
+            <div class="card-footer">
+
+                <div class="form-group text-center" display: inline-block>
+
+                    <button type="button" class="btn btn-lg btn-primary" @onclick="Nuevo" title="Nuevo articulo">
+                        <span class="oi oi-file"> Nuevo</span>
+                    </button>
+                    <label>ㅤ</label>
+
+                   <button type="submit" class="btn btn-lg btn-Comprar"  title="Comprar articulo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
+            </svg><span> Comprar</span>
+                    </button>
+
+                </div>
+            </div>
+            <br />
+
+            <br />
+            <br>
+            <hr>
+
+            <table class="shadow 4 rz-border-radius-4 table table-light table-striped table-bordered">
+                <thead class="thead">
+                    <tr class="text-center table bg-inventariocolor">
+                        <th class="border border-3">Código</th>
+
+                        <th class="border border-3">Descripción Articulo</th>
+
+                        <th class="border border-3">Categoria</th>
+
+                        <th class="border border-3">Cantidad Registrada</th>
+
+                        <th class="border border-3">Fecha de registro</th>
+
+                        <th class="border border-3">Ver</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (lista.Count == 0)
+                    {
+                        <p />
+                        <span>Empty</span>
+                    }
+                    else
+                    {
+                        @foreach (var item in lista)
+                        {
+                            FechaArticuloRegistrado = DateOnly.FromDateTime(item.FechaCreacion);
+                            @if (item.FechaCreacion.Month == FechaArticuloRegistrado.Month && item.FechaCreacion.Year == FechaArticuloRegistrado.Year && item.CantidadRegistrada < 50)
+                            {
+                                descripcion = categoriaBLL.Buscar(item.CategoriaId);
+                                if (descripcion == null) break;
+                                <tr class="text-center">
+                                    <td class="border border-3">@item.ArticuloId</td>
+
+                                    <td class="border border-3">@item.Nombre</td>
+
+                                    <td class="border border-3">@descripcion.Descripcion</td>
+
+                                    <td class="border border-3">@item.CantidadRegistrada</td>
+
+                                    <td class="border border-3">@item.FechaCreacion.ToString("dd/MM/yyyy")</td>
+
+                                    <td class="border border-3">
+                                        <a class="btn btn-sm btn-outline-success oi oi-eye"
+                                           href="articulo/@item.ArticuloId">
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</EditForm>
+
+@code {
+
+    #nullable disable // Para quitar el aviso de nulls
+
+     [Parameter]
+    public int OrdencompraId { get; set; }
+
+    public Articulo ordencompra = new Articulo();
+
+    Articulo articulo = new Articulo();
+
+    Suplidor suplidor = new Suplidor();
+
+    [Parameter]
+    public int ArticuloId { get; set; }
+
+
+
+
+    private decimal Precio { get; set; }
+
+    private DateOnly FechaCompra { get; set; }
+
+    private DateOnly FechaArticuloRegistrado { get; set; }
+
+    public int ArticuloSeleccionado { get; set; }
+
+
+
+
+    public List<Articulo> lista { get; set; } = new List<Articulo>();
+
+
+
+    [Inject]
+    public ArticuloBLL articuloBLL { get; set; } // Inyectando BLL
+
+    [Inject]
+    public SuplidorBLL suplidorBLL { get; set; }
+
+    private Categoria descripcion { get; set; }
+
+    [Inject]
+    public CategoriaBLL categoriaBLL { get; set; } // Inyectando BLLS
+
+    List<Articulo> ArticuloList = new List<Articulo>();
+
+    List<Suplidor> SuplidorList = new List<Suplidor>();
+
+    List<Categoria> CategoriaList = new List<Categoria>();
+
+
+    //-----------------------------------------------------------------------
+
+    protected override void OnInitialized()
+    {
+        articulo = new Articulo();
+        suplidor = new Suplidor();
+        ArticuloList = articuloBLL.GetList(c => true);
+        SuplidorList = suplidorBLL.GetList(c => true);
+        lista = articuloBLL.GetList(a => true);
+    }
+
+    public void Nuevo() // Nueva compra
+    {
+
+        articulo = new Articulo();
+        suplidor = new Suplidor();
+        ArticuloSeleccionado = 0;
+        Precio = 0;
+        ArticuloList = articuloBLL.GetList(c => true);
+        SuplidorList = suplidorBLL.GetList(c => true);
+        lista = articuloBLL.GetList(a => true);
+
+    }
+
+    private void ObtenerDatosArticulo() // Obteniendo los datos del articulo seleccionado
+    {
+        Articulo auxArticulo = articuloBLL.Buscar(ArticuloSeleccionado);
+
+        if (auxArticulo != null)
+        {
+            articulo.Costo = auxArticulo.Costo;
+            articulo.CantidadComprada = auxArticulo.CantidadComprada;
+            articulo.CantidadRegistrada = auxArticulo.CantidadRegistrada;
+        }
+
+       
+    }
+
+
+    public void Guardar() // Guardar articulo
+    {
+        if (ArticuloSeleccionado == 0) // Validacion
+        {
+            Toast.ShowWarning("Tiene que seleccionar un articulo.");
+            return;
+        }
+
+        if (articulo.SuplidorId == 0) // Validacion
+        {
+            Toast.ShowWarning("Tiene que seleccionar un suplidor.");
+            return;
+        }
+
+        if (articulo.CantidadComprada == 0) // Validacion
+        {
+            Toast.ShowWarning("Ingrese la cantidad a comprar.");
+            return;
+        }
+    
+        
+        if (articulo.CantidadComprada > articulo.CantidadRegistrada ) // Validacion
+        {
+            Toast.ShowWarning("La cantidad ingresada no puede ser mayor a la cantidad de almacen.");
+            return;
+        }
+
+        if (articulo.Precio == 0) // Validacion
+        {
+            Toast.ShowWarning("Ingrese el precio de venta.");
+            return;
+        }
+
+        
+        if (articulo.Precio < articulo.Costo)
+        {
+            Toast.ShowWarning("El precio debe ser mayor al costo"); // Validacion
+            return;
+        }
+
+        bool guardado;
+
+        guardado = articuloBLL.Guardar(articulo);
+
+        if (guardado)
+        {
+            guardado = true;
+            articulo = new Articulo();
+            suplidor = new Suplidor();
+            ArticuloSeleccionado = 0;
+        
+            Toast.ShowSuccess($"Compra exitosa");
+
+        }
+        else
+            Toast.ShowError("Ha ocurrido un error en su compra");
+    }
+
+
+    
+}
+
+
+
