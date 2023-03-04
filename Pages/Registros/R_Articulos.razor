@@ -190,14 +190,13 @@
             return;
         }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
+
+
         if (articulo.Cantidad == 0)
         {
             Toast.ShowWarning("Ingresar una cantidad");
-=======
+
         if (articulo.Cantidad == 0)
         {
             Toast.ShowWarning("Ingresar una cantidad");
@@ -206,7 +205,7 @@
 
         if (articulo.Nombre == null)
         {
-            Toast.ShowWarning("Ingresar la descripción del articulo");
+            Toast.ShowWarning("Ingresar la descripciÃ³n del articulo");
             return;
         }
 
@@ -219,13 +218,13 @@
         if (articulo.CategoriaId == 0)
         {
             Toast.ShowWarning("Seleccionar una categoria");
->>>>>>> 1d90187a3297956ae590a1785f664e0bc839a0cc
+
             return;
         }
 
         if (articulo.Nombre == null)
         {
-            Toast.ShowWarning("Ingresar la descripción del articulo");
+            Toast.ShowWarning("Ingresar la descripciÃ³n del articulo");
             return;
         }
 
@@ -240,7 +239,7 @@
             Toast.ShowWarning("Seleccionar una categoria");
             return;
         }
->>>>>>> 1d90187a3297956ae590a1785f664e0bc839a0cc
+
 
         var articulo2 = articuloBLL.ExisteNombre(articulo.Nombre);
         if (articulo2 == null) //si no existe
@@ -307,4 +306,4 @@
             Toast.ShowError("No fue posible eliminar");
     }
 }
-
+}
