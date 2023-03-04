@@ -53,8 +53,6 @@ namespace ProyectoFinal.Models
         [ForeignKey("CategoriaId")]
         public virtual Categoria Categoria { get; set; }
 
-        [ForeignKey("SuplidorId")]
-        public virtual Suplidor suplidor { get; set; } 
 
 
         public Articulo()

@@ -11,7 +11,7 @@ using ProyectoFinal.Data;
 namespace ProyectoFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230303013244_inicial")]
+    [Migration("20230303021756_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
