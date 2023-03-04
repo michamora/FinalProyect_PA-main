@@ -40,7 +40,7 @@ namespace ProyectoFinal.Models
         [ForeignKey("SuplidorId")]
         public virtual Suplidor Suplidor{ get; set; }
 
-          [ForeignKey("CompraId")]
+        [ForeignKey("CompraId")]
         public List<VentasDetalle> VentasDetalle { get; set; }
         
 
@@ -58,16 +58,14 @@ namespace ProyectoFinal.Models
 
         public Compra(int articuloId, int suplidorId, int usuarioId, int fechaCompra, double cantidadComprada, decimal precio)
         {
-    
-            
+   
             SuplidorId = suplidorId;
             ArticuloId = articuloId;
             UsuarioId = usuarioId;
             FechaCompra = DateTime.Now;
             CantidadComprada = cantidadComprada;
             Precio = precio;
-            
+          
         }
-        
     }
 }
