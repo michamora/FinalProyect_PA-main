@@ -54,7 +54,10 @@ namespace ProyectoFinal.Models
         public virtual Categoria Categoria { get; set; }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1d90187a3297956ae590a1785f664e0bc839a0cc
 =======
 >>>>>>> 1d90187a3297956ae590a1785f664e0bc839a0cc
 

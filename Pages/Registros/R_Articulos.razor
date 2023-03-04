@@ -191,11 +191,35 @@
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
         if (articulo.Cantidad == 0)
         {
             Toast.ShowWarning("Ingresar una cantidad");
+=======
+        if (articulo.Cantidad == 0)
+        {
+            Toast.ShowWarning("Ingresar una cantidad");
+            return;
+        }
+
+        if (articulo.Nombre == null)
+        {
+            Toast.ShowWarning("Ingresar la descripción del articulo");
+            return;
+        }
+
+        if (articulo.Costo == 0)
+        {
+            Toast.ShowWarning("Ingresar un Costo / Unidad");
+            return;
+        }
+
+        if (articulo.CategoriaId == 0)
+        {
+            Toast.ShowWarning("Seleccionar una categoria");
+>>>>>>> 1d90187a3297956ae590a1785f664e0bc839a0cc
             return;
         }
 
