@@ -1,6 +1,5 @@
 @page "/ordencompra"
 
-@page "/ordencompra/{ArticuloId:int}"
 
 @* Orden de compra *@
 
@@ -10,7 +9,7 @@
 
 @using BLL
 
-<EditForm Model="ordencompra" OnValidSubmit="Guardar">
+<EditForm Model="articulo" >
     <DataAnnotationsValidator />
 
     <a type="button" class="rz-border-radius-4 shadow border border-4 btn-lg btn btn-warning" data-toggle="tooltip"
@@ -50,13 +49,18 @@
                     Articulo
                     <div class="oi oi-cart"></div>
                 </label>
-                <select @bind="ArticuloSeleccionado" class="form-select text-14" @onfocusout="ObtenerDatosArticulo">
+                <InputSelect @bind-Value="articulo.ArticuloId" class="form-select text-14" @onfocusout="ObtenerDatosArticulo">
                     <option value="0" disabled selected> Seleccione un articulo </option>
-                    @foreach (Articulo item in ArticuloList)
-                    {
+                    @foreach (var item in ArticuloList)
+                    { 
+
+                        if(item.CantidadRegistrada > 0)
+                      {
                         <option value="@item.ArticuloId">@item.Nombre</option>
+                      
+                      }
                     }
-                </select>
+                </InputSelect>
             </div>
 
             @*...................... Categoria ......................*@
@@ -70,13 +74,13 @@
                             d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
                     </svg>
                 </label>
-                <select @bind="articulo.SuplidorId" class="form-select text-14">
+                <InputSelect @bind-Value="articulo.SuplidorId" class="form-select text-14">
                     <option value="0" disabled selected>Seleccione un suplidor</option>
                     @foreach (Suplidor item in SuplidorList)
                     {
                         <option value="@item.SuplidorId">@item.Nombre </option>
                     }
-                </select>
+                </InputSelect>
             </div>
 
             @*...................... Cantidad ......................*@
@@ -84,7 +88,6 @@
             <div class="form-group col-3">
                 <label>Cantidad</label>
                 <InputNumber @bind-Value="articulo.CantidadComprada" class="form-control" />
-                <ValidationMessage For="@(() => articulo.CantidadComprada)" />
             </div>
         </div>
         <br>
@@ -94,7 +97,6 @@
             <div class="form-group col-3">
                 <label>Costo / Unidad</label>
                 <InputNumber @bind-Value="articulo.Costo" class="form-control" readOnly="true" />
-
             </div>
 
             @*...................... Precio ......................*@
@@ -102,7 +104,6 @@
             <div class="form-group col-3">
                 <label>Precio</label>
                 <InputNumber @bind-Value="articulo.Precio" class="form-control" />
-                <ValidationMessage For="@(() => articulo.Precio)" />
             </div>
 
             @*...................... Botones ......................*@
@@ -118,7 +119,7 @@
                     </button>
                     <label>ㅤ</label>
 
-                    <button type="submit" class="btn btn-lg btn-Comprar" title="Comprar articulo">
+                    <button type="button" class="btn btn-lg btn-Comprar" @onclick="Comprar" title="Comprar articulo">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                             class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
@@ -151,21 +152,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (lista.Count == 0)
+                    @if (ArticuloList.Count == 0)
                     {
                         <p />
                         <span>Empty</span>
                     }
                     else
                     {
-                        @foreach (var item in lista)
+                      
+                        @foreach (var item in ArticuloList)
                         {
-                            FechaArticuloRegistrado = DateOnly.FromDateTime(item.FechaCreacion);
-                            @if (item.FechaCreacion.Month == FechaArticuloRegistrado.Month && item.FechaCreacion.Year ==
-                           FechaArticuloRegistrado.Year && item.CantidadRegistrada < 50)
-                            {
-                                descripcion = categoriaBLL.Buscar(item.CategoriaId);
-                                if (descripcion == null) break;
+                           if (item.CantidadRegistrada > 0) 
+                           {
+                            
+                            descripcion = categoriaBLL.Buscar(item.CategoriaId);
+                            if (descripcion == null) break;
                                 <tr class="text-center">
                                     <td class="border border-3">@item.ArticuloId</td>
 
@@ -182,8 +183,9 @@
                                         </a>
                                     </td>
                                 </tr>
-                            }
-                        }
+                            
+                           }
+                     }
                     }
                 </tbody>
             </table>
@@ -196,34 +198,15 @@
 
 #nullable disable // Para quitar el aviso de nulls
 
-    [Parameter]
-    public int OrdencompraId { get; set; }
-
-    public Articulo ordencompra = new Articulo();
-
     Articulo articulo = new Articulo();
 
     Suplidor suplidor = new Suplidor();
 
+    Categoria descripcion  = new Categoria();
+
+
     [Parameter]
     public int ArticuloId { get; set; }
-
-
-
-
-    private decimal Precio { get; set; }
-
-    private DateOnly FechaCompra { get; set; }
-
-    private DateOnly FechaArticuloRegistrado { get; set; }
-
-    public int ArticuloSeleccionado { get; set; }
-
-
-
-
-    public List<Articulo> lista { get; set; } = new List<Articulo>();
-
 
 
     [Inject]
@@ -232,7 +215,6 @@
     [Inject]
     public SuplidorBLL suplidorBLL { get; set; }
 
-    private Categoria descripcion { get; set; }
 
     [Inject]
     public CategoriaBLL categoriaBLL { get; set; } // Inyectando BLLS
@@ -240,10 +222,7 @@
     List<Articulo> ArticuloList = new List<Articulo>();
 
     List<Suplidor> SuplidorList = new List<Suplidor>();
-
-    List<Categoria> CategoriaList = new List<Categoria>();
-
-
+        
     //-----------------------------------------------------------------------
 
     protected override void OnInitialized()
@@ -252,7 +231,13 @@
         suplidor = new Suplidor();
         ArticuloList = articuloBLL.GetList(c => true);
         SuplidorList = suplidorBLL.GetList(c => true);
-        lista = articuloBLL.GetList(a => true);
+        
+         if (ArticuloId > 0)
+        {
+            articulo.ArticuloId = ArticuloId;
+            this.Buscar();
+        }
+       
     }
 
     public void Nuevo() // Nueva compra
@@ -260,40 +245,51 @@
 
         articulo = new Articulo();
         suplidor = new Suplidor();
-        ArticuloSeleccionado = 0;
-        Precio = 0;
         ArticuloList = articuloBLL.GetList(c => true);
         SuplidorList = suplidorBLL.GetList(c => true);
-        lista = articuloBLL.GetList(a => true);
+      
 
     }
 
     private void ObtenerDatosArticulo() // Obteniendo los datos del articulo seleccionado
     {
-        Articulo auxArticulo = articuloBLL.Buscar(ArticuloSeleccionado);
+        Articulo auxArticulo = articuloBLL.Buscar(articulo.ArticuloId);
 
         if (auxArticulo != null)
         {
             articulo.Costo = auxArticulo.Costo;
-            articulo.CantidadComprada = auxArticulo.CantidadComprada;
-            articulo.CantidadRegistrada = auxArticulo.CantidadRegistrada;
+            
+        }
+
+
+    }
+
+    private void ActualizandoUnidades() // Obteniendo los datos del articulo seleccionado
+    {
+        Articulo auxArticulo = articuloBLL.Buscar(articulo.ArticuloId);
+
+        if (auxArticulo != null)
+        {
+            
+            auxArticulo.CantidadRegistrada -= articulo.CantidadComprada;
+            
         }
 
 
     }
 
 
-    public void Guardar() // Guardar articulo
+    public void Comprar() // Guardar articulo
     {
-        if (ArticuloSeleccionado == 0) // Validacion
+        if (articulo.ArticuloId == 0) // Validacion
         {
-            Toast.ShowWarning("Tiene que seleccionar un articulo.");
+            Toast.ShowWarning("Seleccione un articulo.");
             return;
         }
 
         if (articulo.SuplidorId == 0) // Validacion
         {
-            Toast.ShowWarning("Tiene que seleccionar un suplidor.");
+            Toast.ShowWarning("Seleccione un suplidor.");
             return;
         }
 
@@ -302,9 +298,10 @@
             Toast.ShowWarning("Ingrese la cantidad a comprar.");
             return;
         }
+ 
+        Articulo auxArticulo = articuloBLL.Buscar(articulo.ArticuloId);
 
-
-        if (articulo.CantidadComprada > articulo.CantidadRegistrada) // Validacion
+        if (articulo.CantidadComprada > auxArticulo.CantidadRegistrada) // Validacion
         {
             Toast.ShowWarning("La cantidad ingresada no puede ser mayor a la cantidad de almacen.");
             return;
@@ -323,27 +320,62 @@
             return;
         }
 
-        bool guardado;
-
-        guardado = articuloBLL.Guardar(articulo);
-
-        if (guardado)
+        var articulo2 = articuloBLL.ExisteNombre(articulo.Nombre);
+        if (articulo2 == null) //si no existe
         {
-            guardado = true;
-            articulo = new Articulo();
-            suplidor = new Suplidor();
-            ArticuloSeleccionado = 0;
-
-            Toast.ShowSuccess($"Compra exitosa");
-
+            if (articuloBLL.Guardar(articulo))
+            {
+                Toast.ShowSuccess($"Articulo: {articulo.Nombre}, Guardado correctamente");
+                ActualizandoUnidades();
+                articulo = new Articulo();
+            }
+            else
+                Toast.ShowError("No fue posible guardar");
         }
-        else
-            Toast.ShowError("Ha ocurrido un error en su compra");
+        else // si existe
+        {
+            if (articulo2.Nombre.ToLower() == articulo.Nombre.ToLower() && articulo2.ArticuloId == articulo.ArticuloId)
+            {
+                if (articuloBLL.Guardar(articulo))
+                {
+                    Toast.ShowSuccess($"Articulo: {articulo.Nombre}, Guardado correctamente");
+                    articulo = new Articulo();
+                }
+                else
+                    Toast.ShowError("No fue posible guardar");
+            }
+            else
+            {
+                Toast.ShowError($"Articulo: {articulo.Nombre}, ya esta registrado");
+            }
+        }
     }
 
 
+     public void Buscar() // Buscar articulo
+    {
+        if (this.articulo.ArticuloId > 0)
+        {
+            var Articulo = articuloBLL.Buscar(articulo.ArticuloId);
+
+            if (Articulo != null)
+            {
+                articulo = Articulo;
+
+                Toast.ShowSuccess($"Articulo: {articulo.Nombre}, encontrado ");
+            }
+            else
+            {
+                Toast.ShowWarning($"No existe un articulo con este Id: {articulo.ArticuloId}");
+            }
+        }
+    }
 
 }
+
+
+
+
 
 
 

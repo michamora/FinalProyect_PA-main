@@ -15,6 +15,8 @@ namespace ProyectoFinal.Models
         [Key]  
         public int ArticuloId { get; set; }
 
+        [Required(ErrorMessage = "Campo suplidor es obligatorio.")]
+        [Range(minimum: 1, maximum: int.MaxValue, ErrorMessage = "Seleccione el suplidor del articulo.")]         
         public int SuplidorId { get; set; }
 
         [Required(ErrorMessage = "Ingrese el nombre del articulo.")]
@@ -36,6 +38,10 @@ namespace ProyectoFinal.Models
         public double CantidadComprada { get; set; }
 
         [Required]
+        [Range(1, float.MaxValue, ErrorMessage = "Ingrese la cantidad a aumentar del articulo.")]
+        public double CantidadAumentada { get; set; }
+
+        [Required]
         [Range(minimum: 1, maximum: int.MaxValue, ErrorMessage = "Ingrese un costo mayor a 0.")]
         public decimal Costo { get; set; }
 
@@ -53,13 +59,14 @@ namespace ProyectoFinal.Models
         [ForeignKey("CategoriaId")]
         public virtual Categoria Categoria { get; set; }
 
-
+        public virtual Suplidor Suplidor { get; set; }
 
         public Articulo()
         {
             ArticuloId = 0;
             UsuarioId = 0; 
             SuplidorId = 0;
+            CategoriaId = 0;
             Nombre = string.Empty;
             FechaCreacion = DateTime.Now;
             CantidadRegistrada = 0;

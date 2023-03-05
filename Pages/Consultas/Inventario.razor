@@ -1,12 +1,13 @@
 @page "/inventarioArticulos"
 
+
 @inject AuthenticationStateProvider Authentication
 
 @inject IToastService Toast
 
 @using BLL
 
-<EditForm Model="inventarioArticulos" OnValidSubmit="Guardar">
+<EditForm Model="articulo" OnValidSubmit="Actualizar">
     <DataAnnotationsValidator />
 
     <div class="card shadow-lg">
@@ -30,7 +31,7 @@
                    
                 <div class="input-group d-flex align-items-end">
 
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-2.5">
                         <label>Filtro</label>
                         <InputSelect class="form-select text-14" @bind-Value="Filtro">
                             <option value="0" disabled selected>Seleccione un filtro</option>
@@ -46,7 +47,7 @@
                                    placeholder="Ingrese el criterio de busqueda"/>
                     </div>
 
-                    <button type="button" class="btn btn-consulta" @onclick="Buscar" title="Buscar articulo">
+                    <button type="button" class="btn btn-consulta" @onclick="Buscar" title="Buscar articulo" >
                         <i class="oi oi-grid-four-up mr-2"/>
                     </button>
                 </div>
@@ -56,7 +57,7 @@
 
                     <div class="form-group col-3">
                         <label>Descripción Articulo</label>
-                        <InputText @bind-Value="descripción" placeholder="Descripción articulo" class="form-control"
+                        <InputText @bind-Value="Nombre" placeholder="Descripción articulo" class="form-control"
                             readOnly="true" />
                     </div>
 
@@ -78,6 +79,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if (ArticuloList is not null){
                             @foreach (var item in ArticuloList)
                             {
                                 if (Criterio == item.ArticuloId.ToString())
@@ -87,9 +89,10 @@
 
                                         <td class="border border-3">@item.Nombre</td>
 
-                                        <td class="border border-3">@item.CantidadComprada</td>
+                                        <td class="border border-3">@item.CantidadRegistrada</td>
                                     </tr>
                                 }
+                            }
                             }
                         </tbody>
                     </table>
@@ -102,7 +105,7 @@
                                 d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434L7.752.066ZM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567L4.25 7.504ZM7.5 9.933l-2.75 1.571v3.134l2.75-1.571V9.933Zm1 3.134 2.75 1.571v-3.134L8.5 9.933v3.134Zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567-2.742 1.567Zm2.242-2.433V3.504L8.5 5.076V8.21l2.75-1.572ZM7.5 8.21V5.076L4.75 3.504v3.134L7.5 8.21ZM5.258 2.643 8 4.21l2.742-1.567L8 1.076 5.258 2.643ZM15 9.933l-2.75 1.571v3.134L15 13.067V9.933ZM3.75 14.638v-3.134L1 9.933v3.134l2.75 1.571Z" />
                         </svg></label>
                     <div class="form-group col-2">
-                        <InputNumber @bind-Value="CantidadNueva" class="form-control bg-fondoinventario" />
+                        <InputNumber @bind-Value="CantidadAumentada" class="form-control bg-fondoinventario"/>
                     </div>
                     <p />
 
@@ -114,12 +117,12 @@
                                 d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z" />
                         </svg></label>
                     <div class="form-group col-2" style="margin:auto">
-                        <InputNumber @bind-Value="Detalle.Cantidad" class="form-control bg-fondoinventario" />
+                        <InputNumber @bind-Value="CantidadAumentada" class="form-control bg-fondoinventario"/>
                     </div>
 
 
                     <div class="from-group col-2" style="margin:auto">
-                        <InputNumber @bind-Value="venta.Existencia" class="form-control" readOnly="true" />
+                        <InputNumber @bind-Value="CantidadRegistrada" class="form-control" readOnly="true" />
                     </div>
 
                     <div class="form-group col" style="margin:auto">
@@ -132,7 +135,7 @@
                         </button>
 
                         <a data-toggle="tooltip"
-       data-placement="right" title="Ingresar al apartado de reorden" href="reorden" class="stretched-link text-success" style="position: absolute; top:0; right:0; margin-right: 20px; margin-top: 490px;">
+       data-placement="right" title="Realizar reorden" href="reorden" class="stretched-link text-consulta" style="position: absolute; top:0; right:0; margin-right: 20px; margin-top: 510px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
                                 <path
@@ -160,87 +163,101 @@
 @code {
 
 #nullable disable // Para quitar el aviso de nulls
+
+    [Parameter]
+    public int ArticuloId { get; set; }
+
     public string Filtro;
 
     public string Criterio;
 
-    public Articulo inventarioArticulos = new Articulo();
-
-    public double CantidadNueva { get; set; }
-
-    public double CantidadActualizada { get; set; }
-
-    Ventas venta = new Ventas();
-    VentasDetalle Detalle = new VentasDetalle();
+    //-----------------------------------
     Articulo articulo = new Articulo();
-    public string descripción { get; set; }
 
-    public List<Articulo> ArticuloList { get; set; } = new List<Articulo>();
+    public double CantidadAumentada { get; set; }
 
-    public List<Ventas> VentasList { get; set; } = new List<Ventas>();
+    public double CantidadRegistrada { get; set; }
 
+    public string Nombre { get; set; }
 
-    [Inject]
-    public CategoriaBLL categoriaBLL { get; set; } // Inyectando BLLS
+    public double cantidadalmacenada { get; set; }
+
+    List<Articulo> ArticuloList = new List<Articulo>();
 
     [Inject]
     public ArticuloBLL articuloBLL { get; set; } // Inyectando BLL
-
-    [Inject]
-    public VentasBLL ventaBLL { get; set; } // Inyectando BLL
-
-    List<Categoria> CategoriaList = new List<Categoria>();
 
 
     //-----------------------------------------------------------------------
 
     protected override void OnInitialized()
     {
-        inventarioArticulos = new Articulo();
-        CategoriaList = categoriaBLL.GetList(c => true);
+        articulo = new Articulo();
         ArticuloList = articuloBLL.GetList(c => true);
-        VentasList = ventaBLL.GetList(c => true);
-
+        
         Filtro = "0";
+        Criterio = string.Empty;
  
-        this.Buscar();
+       if (ArticuloId > 0)
+        {
+            articulo.ArticuloId = ArticuloId;
+            this.Buscar();
+        }
         
     }
 
-    public void Guardar() // Guardar articulo
-    {
-        var articulo2 = articuloBLL.Guardar(inventarioArticulos); ;
-
-        ActualizandoUnidadesArticulo();
-
-        if (articulo2)
-        {
-            articulo = new Articulo();
-            venta = new Ventas();
-
-            Toast.ShowSuccess("Articulo actualizado");
-        }
-        else
-        {
-            articulo2 = false;
-            Toast.ShowWarning("Articulo no actualizado");
-        }
-    }
-
-    private void ActualizandoUnidadesArticulo()
+     private void ActualizandoUnidadesArticulo()
     {
         Articulo auxArticulo = articuloBLL.Buscar(int.Parse(Criterio));
 
         if (auxArticulo != null)
         {
-            // Las unidades que se sumaron
-            venta.Existencia = auxArticulo.CantidadComprada;
-            bool Articulosss = articuloBLL.Guardar(auxArticulo);
-            venta.Existencia = auxArticulo.CantidadComprada + Detalle.Cantidad;
-
-            CantidadActualizada = auxArticulo.CantidadComprada + CantidadNueva;
+            
+            
+            ObtenerDatosArticulo();
+            
         }
     }
+
+    public void Actualizar() // Guardar articulo
+    {
+        if (Filtro == "0")
+        {
+            Toast.ShowWarning("Seleccione un filtro de busqueda");
+            return;
+        }
+
+        if (Criterio == string.Empty)
+        {
+            Toast.ShowWarning("Ingrese un criterio de busqueda");
+            return;
+        }
+
+        if (CantidadAumentada == 0)
+        {
+            Toast.ShowWarning("Ingrese la cantidad que desea aumentar");
+            return;
+        }
+
+
+        var articulo2 = articuloBLL.Guardar(articulo); ;
+
+        
+        if (articulo2)
+        { 
+            ActualizandoUnidadesArticulo();
+            articulo = new Articulo();
+    
+            Toast.ShowSuccess("Articulo actualizado");
+        }
+        else
+        {
+            articulo2 = false;
+            Toast.ShowWarning("Ha ocurrido un error");
+        }
+    }
+
+   
 
     private void ObtenerDatosArticulo() // Obteniendo los datos del articulo buscado
     {
@@ -248,9 +265,11 @@
 
         if (auxArticulo != null)
         {
-            descripción = auxArticulo.Nombre; // Obteniendo el nombre del articulo
+            Nombre = auxArticulo.Nombre; // Obteniendo el nombre del articulo
+            CantidadRegistrada = auxArticulo.CantidadRegistrada; 
+            CantidadAumentada = auxArticulo.CantidadAumentada;
+            
 
-            venta.Existencia = auxArticulo.CantidadComprada; // Mostrando la cantidad de unidades del articulo buscado
         }
     }
 

@@ -226,34 +226,6 @@ namespace ProyectoFinal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Articulo",
-                columns: table => new
-                {
-                    ArticuloId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    SuplidorId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Nombre = table.Column<string>(type: "TEXT", nullable: false),
-                    FechaCreacion = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    CategoriaId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CantidadRegistrada = table.Column<double>(type: "REAL", nullable: false),
-                    CantidadComprada = table.Column<double>(type: "REAL", nullable: false),
-                    Costo = table.Column<decimal>(type: "TEXT", nullable: false),
-                    Precio = table.Column<decimal>(type: "TEXT", nullable: false),
-                    Estado = table.Column<bool>(type: "INTEGER", nullable: false),
-                    UsuarioId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Articulo", x => x.ArticuloId);
-                    table.ForeignKey(
-                        name: "FK_Articulo_Categoria_CategoriaId",
-                        column: x => x.CategoriaId,
-                        principalTable: "Categoria",
-                        principalColumn: "CategoriaId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Ventas",
                 columns: table => new
                 {
@@ -279,6 +251,41 @@ namespace ProyectoFinal.Migrations
                         column: x => x.PagoId,
                         principalTable: "Pago",
                         principalColumn: "PagoId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Articulo",
+                columns: table => new
+                {
+                    ArticuloId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    SuplidorId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Nombre = table.Column<string>(type: "TEXT", nullable: false),
+                    FechaCreacion = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CategoriaId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CantidadRegistrada = table.Column<double>(type: "REAL", nullable: false),
+                    CantidadComprada = table.Column<double>(type: "REAL", nullable: false),
+                    CantidadAumentada = table.Column<double>(type: "REAL", nullable: false),
+                    Costo = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Precio = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Estado = table.Column<bool>(type: "INTEGER", nullable: false),
+                    UsuarioId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Articulo", x => x.ArticuloId);
+                    table.ForeignKey(
+                        name: "FK_Articulo_Categoria_CategoriaId",
+                        column: x => x.CategoriaId,
+                        principalTable: "Categoria",
+                        principalColumn: "CategoriaId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Articulo_Suplidor_SuplidorId",
+                        column: x => x.SuplidorId,
+                        principalTable: "Suplidor",
+                        principalColumn: "SuplidorId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -360,6 +367,11 @@ namespace ProyectoFinal.Migrations
                 column: "CategoriaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Articulo_SuplidorId",
+                table: "Articulo",
+                column: "SuplidorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -433,9 +445,6 @@ namespace ProyectoFinal.Migrations
                 name: "Clientes");
 
             migrationBuilder.DropTable(
-                name: "Suplidor");
-
-            migrationBuilder.DropTable(
                 name: "VentasDetalle");
 
             migrationBuilder.DropTable(
@@ -452,6 +461,9 @@ namespace ProyectoFinal.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categoria");
+
+            migrationBuilder.DropTable(
+                name: "Suplidor");
 
             migrationBuilder.DropTable(
                 name: "Pago");

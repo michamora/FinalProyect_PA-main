@@ -153,6 +153,9 @@ namespace ProyectoFinal.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<double>("CantidadAumentada")
+                        .HasColumnType("REAL");
+
                     b.Property<double>("CantidadComprada")
                         .HasColumnType("REAL");
 
@@ -187,6 +190,8 @@ namespace ProyectoFinal.Migrations
                     b.HasKey("ArticuloId");
 
                     b.HasIndex("CategoriaId");
+
+                    b.HasIndex("SuplidorId");
 
                     b.ToTable("Articulo");
                 });
@@ -575,7 +580,15 @@ namespace ProyectoFinal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ProyectoFinal.Models.Suplidor", "Suplidor")
+                        .WithMany()
+                        .HasForeignKey("SuplidorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Categoria");
+
+                    b.Navigation("Suplidor");
                 });
 
             modelBuilder.Entity("ProyectoFinal.Models.Ventas", b =>

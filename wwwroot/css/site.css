@@ -217,6 +217,17 @@ a, .btn-link {
     border-color: #e7d066;
 }
 
+.bg-notas {
+    color: #b9b9b9;
+    
+    
+}
+
+.text-notas:hover {
+    color: #8f8f8f;
+    
+}
+
 .content {
     padding-top: 1.1rem;
 }

@@ -100,6 +100,8 @@
             {
                 @foreach (var item in lista)
                 {
+                    if (item.CantidadComprada > 0) 
+                           {
                     descripcion = categoriaBLL.Buscar(item.CategoriaId);
                     if (descripcion == null) break;
                     <tr>
@@ -122,6 +124,7 @@
                     </tr>
                 }
             }
+        }
             </tbody>
         </table>
     </div>
@@ -167,6 +170,7 @@
         {
             switch (Filtro)
             {
+                
                 case "1": //Código
                     lista = articuloBLL.GetList(e => e.ArticuloId == int.Parse(Criterio));
                     break;
