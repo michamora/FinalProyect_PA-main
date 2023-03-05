@@ -13,37 +13,50 @@
 <EditForm Model="compras" OnValidSubmit="Guardar">
     <DataAnnotationsValidator />
 
-    <a type="button" class="rz-border-radius-4 shadow border border-4 btn-lg btn btn-Inventario" data-toggle="tooltip"
-       data-placement="right" title="Inventario de articulos" href="inventarioArticulos"><span>Inventario</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-minecart-loaded" viewBox="0 0 16 16">
-                            <path d="M4 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0 1a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm8-1a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0 1a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM.115 3.18A.5.5 0 0 1 .5 3h15a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 14 12H2a.5.5 0 0 1-.491-.408l-1.5-8a.5.5 0 0 1 .106-.411zm.987.82 1.313 7h11.17l1.313-7H1.102z"/>
-                            <path fill-rule="evenodd" d="M6 1a2.498 2.498 0 0 1 4 0c.818 0 1.545.394 2 1 .67 0 1.552.57 2 1h-2c-.314 0-.611-.15-.8-.4-.274-.365-.71-.6-1.2-.6-.314 0-.611-.15-.8-.4a1.497 1.497 0 0 0-2.4 0c-.189.25-.486.4-.8.4-.507 0-.955.251-1.228.638-.09.13-.194.25-.308.362H3c.13-.147.401-.432.562-.545a1.63 1.63 0 0 0 .393-.393A2.498 2.498 0 0 1 6 1z"/>
-                        </svg>
-    </a>
-    <label>ㅤㅤㅤㅤ</label>
-
-    <a type="button" class="rz-border-radius-4 shadow border border-4 btn-lg btn btn-ordendecompra" data-toggle="tooltip"
-       data-placement="right" title="Realizar orden de compra" href="Ordencompra"><span>Orden de compra</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
+    <div class="form-group col-3">
+        <a type="button" class="rz-border-radius-4 shadow border border-4 btn-lg btn btn-Inventario"
+            style="position: absolute; top:0;  right:0; margin-right: 25px; margin-top: 75px;" data-toggle="tooltip"
+            data-placement="right" title="Inventario de articulos" href="inventarioArticulos"><span>Inventario</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                class="bi bi-minecart-loaded" viewBox="0 0 16 16">
+                <path
+                    d="M4 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0 1a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm8-1a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0 1a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM.115 3.18A.5.5 0 0 1 .5 3h15a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 14 12H2a.5.5 0 0 1-.491-.408l-1.5-8a.5.5 0 0 1 .106-.411zm.987.82 1.313 7h11.17l1.313-7H1.102z" />
+                <path fill-rule="evenodd"
+                    d="M6 1a2.498 2.498 0 0 1 4 0c.818 0 1.545.394 2 1 .67 0 1.552.57 2 1h-2c-.314 0-.611-.15-.8-.4-.274-.365-.71-.6-1.2-.6-.314 0-.611-.15-.8-.4a1.497 1.497 0 0 0-2.4 0c-.189.25-.486.4-.8.4-.507 0-.955.251-1.228.638-.09.13-.194.25-.308.362H3c.13-.147.401-.432.562-.545a1.63 1.63 0 0 0 .393-.393A2.498 2.498 0 0 1 6 1z" />
             </svg>
-         </a>
+        </a>
+        <a type="button" class="rz-border-radius-4 shadow border border-4 btn-lg btn btn-ordendecompra" data-toggle="tooltip"
+            data-placement="right" style="position: absolute; top:0;  right:0; margin-right: 200px; margin-top: 75px;" title="Realizar orden de compra" href="Ordencompra"><span>Orden de
+                compra</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
+            </svg>
+        </a>
+        <label></label>
+      
+    </div>
+    <label></label>
+
     <hr>
-    
 
-   
 
-    <div class="card-header justify-content-center text-center bg-Comprascolor">
+
+
+    <div class="card-header justify-content-center text-center bg-Comprascolor shadow">
         <h3 class="card-title">
             Compras
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
-                            <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z" />
-                        </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-shop"
+                viewBox="0 0 16 16">
+                <path
+                    d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z" />
+            </svg>
         </h3>
     </div>
     <hr>
 
-    <div class="card-body">
+    <div class="card-body shadow">
 
         <div class="row">
 
@@ -58,34 +71,36 @@
             @*...................... Nombre ......................*@
 
             <div class="form-group col-3">
-                        <label>Nombre</label>
-                        <InputText @bind-Value="articulo.Nombre" placeholder="Nombre articulo" class="form-control" />
-                        <ValidationMessage For="@(() => articulo.Nombre)" />
-                           
-                    </div>
+                <label>Nombre</label>
+                <InputText @bind-Value="articulo.Nombre" placeholder="Nombre articulo" class="form-control" />
+                <ValidationMessage For="@(() => articulo.Nombre)" />
 
-           @*...................... Categoria ......................*@
+            </div>
 
-                    <div class="form-group col-3">
-                        <label>
-                            Categoria
-                            <div class="oi oi-sort-ascending"></div>
-                        </label>
-                        <InputSelect @bind-Value="articulo.CategoriaId" class="form-select text-14">
-                            <option value="0" disabled selected>Seleccione una categoria</option>
-                            @foreach (var item in CategoriaList)
-                            {
-                                <option value="@item.CategoriaId">@item.Descripcion</option>
-                            }
-                        </InputSelect>
-                        <ValidationMessage For="@(() => articulo.CategoriaId)" />
-                    </div>
+            @*...................... Categoria ......................*@
+
+            <div class="form-group col-3">
+                <label>
+                    Categoria
+                    <div class="oi oi-sort-ascending"></div>
+                </label>
+                <InputSelect @bind-Value="articulo.CategoriaId" class="form-select text-14">
+                    <option value="0" disabled selected>Seleccione una categoria</option>
+                    @foreach (var item in CategoriaList)
+                    {
+                        <option value="@item.CategoriaId">@item.Descripcion</option>
+                    }
+                </InputSelect>
+                <ValidationMessage For="@(() => articulo.CategoriaId)" />
+            </div>
 
             <div class="form-group col-md-3">
                 <label>
                     Suplidor
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
-                        <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-truck" viewBox="0 0 16 16">
+                        <path
+                            d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
                     </svg>
                 </label>
                 <select @bind="articulo.SuplidorId" class="form-select text-14">
@@ -97,9 +112,9 @@
                 </select>
                 <br>
             </div>
-            </div>
+        </div>
 
-            
+
 
         <div class="row">
 
@@ -110,11 +125,11 @@
                 <InputNumber @bind-Value="articulo.CantidadComprada" class="form-control" />
                 <ValidationMessage For="@(() => articulo.CantidadComprada)" />
             </div>
-       
+
 
             <div class="form-group col-3">
                 <label>Costo / Unidad</label>
-                <InputNumber @bind-Value="articulo.Costo" class="form-control"/>
+                <InputNumber @bind-Value="articulo.Costo" class="form-control" />
 
             </div>
 
@@ -124,41 +139,38 @@
                 <label>Precio</label>
                 <InputNumber @bind-Value="articulo.Precio" class="form-control" />
                 <ValidationMessage For="@(() => articulo.Precio)" />
-                    <br>
+                <br>
             </div>
-            
+
         </div>
-        
 
-            @*...................... Botones ......................*@
 
-            <p />
+        @*...................... Botones ......................*@
 
-            <div class="card-footer">
+        <p />
 
-                <div class="form-group text-center" display: inline-block>
+        <div class="card-footer">
+            <p/>
+            <div class="form-group text-center" display: inline-block>
+                <button type="button" class="btn btn-lg btn-primary" @onclick="Nuevo" title="Nuevo articulo">
+                    <span class="oi oi-file"> Nuevo</span>
+                </button>
 
-                    <button type="button" class="btn btn-lg btn-primary" @onclick="Nuevo" title="Nuevo articulo">
-                        <span class="oi oi-file"> Nuevo</span>
-                    </button>
-                    <label>ㅤ</label>
+               <label></label>
+               <label></label>
 
-                    <button type="submit" class="btn btn-lg btn-Comprar"  title="Comprar articulo">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
-            </svg><span> Comprar</span>
-                    </button>
-
-                
+                <a href="ordencompra" data-placement="right" data-toggle="tooltip" type="submit"
+                    class="btn btn-lg btn-Comprar" title="Comprar articulo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
+                    </svg><span> Comprar</span>
+                </a>
             </div>
-            <br />
-
-            <br />
-            <br>
-            <hr>
-
-          
+            <p/>
         </div>
+        <hr/>
     </div>
 
 </EditForm>
@@ -285,7 +297,7 @@
             }
         }
     }
-    
+
 
     public void Buscar() // Buscar articulo
     {

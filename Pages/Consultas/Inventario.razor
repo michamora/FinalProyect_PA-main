@@ -1,8 +1,5 @@
 @page "/inventarioArticulos"
 
-@page "/inventarioArticulos/{InventarioId:int}"
-
-
 @inject AuthenticationStateProvider Authentication
 
 @inject IToastService Toast
@@ -20,41 +17,55 @@
             <div class="card-header rz-border-radius-4 shadow text-center">
                 <h4>
                     Inventario
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-box-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.004-.001.274-.11a.75.75 0 0 1 .558 0l.274.11.004.001 6.971 2.789Zm-1.374.527L8 5.962 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339Z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        class="bi bi-box-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.004-.001.274-.11a.75.75 0 0 1 .558 0l.274.11.004.001 6.971 2.789Zm-1.374.527L8 5.962 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339Z" />
                     </svg>
                 </h4>
             </div>
 
             <div class="card-body">
                 <div class="row">
-
                    
+                <div class="input-group d-flex align-items-end">
 
-                    <div class="input-group d-flex align-items-end">
-                        <div class="Form-group col-3">
-                            <label>Criterio</label>
-                            <InputText class="form-control" @bind-Value="Criterio"
-                                       placeholder="Ingresar Código" />
-                        </div>
-
-                        <button type="button" class="btn btn-consulta" @onfocusout="ObtenerDatosArticulo" @onclick="Buscar" title="Consultar articulos">
-                            <i class="oi oi-grid-four-up mr-2" /> 
-                        </button>
+                    <div class="form-group col-md-2">
+                        <label>Filtro</label>
+                        <InputSelect class="form-select text-14" @bind-Value="Filtro">
+                            <option value="0" disabled selected>Seleccione un filtro</option>
+                            <option value="1">Codigo</option>
+                            <option value="2" disabled selected>Categoria</option>
+                            <option value="3" disabled selected>Descripción Articulo</option>
+                        </InputSelect>
                     </div>
+
+                    <div class="Form-group col-3">
+                        <label>Criterio</label>
+                        <InputText class="form-control" @bind-Value="Criterio"
+                                   placeholder="Ingrese el criterio de busqueda"/>
+                    </div>
+
+                    <button type="button" class="btn btn-consulta" @onclick="Buscar" title="Buscar articulo">
+                        <i class="oi oi-grid-four-up mr-2"/>
+                    </button>
+                </div>
+                    
                     <p />
 
 
                     <div class="form-group col-3">
                         <label>Descripción Articulo</label>
-                        <InputText @bind-Value="descripción" placeholder="Descripción articulo" class="form-control" readOnly="true" />
+                        <InputText @bind-Value="descripción" placeholder="Descripción articulo" class="form-control"
+                            readOnly="true" />
                     </div>
 
                     <p />
                     <p />
                     <hr>
 
-                    <table class="justify-content-center shadow 4 rz-border-radius-4 table table-light table-striped table-bordered">
+                    <table
+                        class="justify-content-center shadow 4 rz-border-radius-4 table table-light table-striped table-bordered">
                         <thead class="thead">
                             <tr class="text-center justify-content-center table bg-inventariocolor">
 
@@ -69,7 +80,7 @@
                         <tbody>
                             @foreach (var item in ArticuloList)
                             {
-                                if (Criterio == item.ArticuloId.ToString() || Criterio == item.Nombre.ToLower())
+                                if (Criterio == item.ArticuloId.ToString())
                                 {
                                     <tr class="text-center ">
                                         <td class="border border-3">@item.ArticuloId</td>
@@ -85,49 +96,62 @@
                     <hr />
                     <p />
 
-                    <label>Nueva Cantidad <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-boxes" viewBox="0 0 16 16">
-  <path d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434L7.752.066ZM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567L4.25 7.504ZM7.5 9.933l-2.75 1.571v3.134l2.75-1.571V9.933Zm1 3.134 2.75 1.571v-3.134L8.5 9.933v3.134Zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567-2.742 1.567Zm2.242-2.433V3.504L8.5 5.076V8.21l2.75-1.572ZM7.5 8.21V5.076L4.75 3.504v3.134L7.5 8.21ZM5.258 2.643 8 4.21l2.742-1.567L8 1.076 5.258 2.643ZM15 9.933l-2.75 1.571v3.134L15 13.067V9.933ZM3.75 14.638v-3.134L1 9.933v3.134l2.75 1.571Z"/>
-</svg></label>
+                    <label>Nueva Cantidad <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            fill="currentColor" class="bi bi-boxes" viewBox="0 0 16 16">
+                            <path
+                                d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434L7.752.066ZM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567L4.25 7.504ZM7.5 9.933l-2.75 1.571v3.134l2.75-1.571V9.933Zm1 3.134 2.75 1.571v-3.134L8.5 9.933v3.134Zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567-2.742 1.567Zm2.242-2.433V3.504L8.5 5.076V8.21l2.75-1.572ZM7.5 8.21V5.076L4.75 3.504v3.134L7.5 8.21ZM5.258 2.643 8 4.21l2.742-1.567L8 1.076 5.258 2.643ZM15 9.933l-2.75 1.571v3.134L15 13.067V9.933ZM3.75 14.638v-3.134L1 9.933v3.134l2.75 1.571Z" />
+                        </svg></label>
                     <div class="form-group col-2">
                         <InputNumber @bind-Value="CantidadNueva" class="form-control bg-fondoinventario" />
                     </div>
                     <p />
 
-                    <label>Sumar Cantidad <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-patch-plus" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"/>
-  <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z"/>
-</svg></label>
+                    <label>Sumar Cantidad <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                            fill="currentColor" class="bi bi-patch-plus" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z" />
+                            <path
+                                d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z" />
+                        </svg></label>
                     <div class="form-group col-2" style="margin:auto">
                         <InputNumber @bind-Value="Detalle.Cantidad" class="form-control bg-fondoinventario" />
                     </div>
-                     
-                      
+
+
                     <div class="from-group col-2" style="margin:auto">
                         <InputNumber @bind-Value="venta.Existencia" class="form-control" readOnly="true" />
                     </div>
 
                     <div class="form-group col" style="margin:auto">
-                        <button type="submit" class="btn btn-Comprar" title="Actualizar cantidad">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hammer" viewBox="0 0 16 16">
-  <path d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5.009 5.009 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.839 3.112-.839a.5.5 0 0 0 .472-.334z"/>
-</svg><span> Actualizar</span> 
+                        <button type="submit" class="btn btn-consulta shadow" title="Actualizar cantidad">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor"
+                                class="bi bi-hammer" viewBox="0 0 16 16">
+                                <path
+                                    d="M9.972 2.508a.5.5 0 0 0-.16-.556l-.178-.129a5.009 5.009 0 0 0-2.076-.783C6.215.862 4.504 1.229 2.84 3.133H1.786a.5.5 0 0 0-.354.147L.146 4.567a.5.5 0 0 0 0 .706l2.571 2.579a.5.5 0 0 0 .708 0l1.286-1.29a.5.5 0 0 0 .146-.353V5.57l8.387 8.873A.5.5 0 0 0 14 14.5l1.5-1.5a.5.5 0 0 0 .017-.689l-9.129-8.63c.747-.456 1.772-.839 3.112-.839a.5.5 0 0 0 .472-.334z" />
+                            </svg> <span>Actualizar</span>  
                         </button>
-                        <div> ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
-  <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-  <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-</svg>
-          
-                Deseas realizar un reorden de articulos?
-           
-        </div>
-                        
+
+                        <a data-toggle="tooltip"
+       data-placement="right" title="Ingresar al apartado de reorden" href="reorden" class="stretched-link text-success" style="position: absolute; top:0; right:0; margin-right: 20px; margin-top: 490px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
+                                <path
+                                    d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                <path
+                                    d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+                            </svg>
+
+                            Deseas realizar un reorden de articulos?
+
+                        </a>
+
                     </div>
-                    
+                    <p/>
+
                 </div>
             </div>
-            
+
         </div>
-        
     </div>
 </EditForm>
 
@@ -135,14 +159,12 @@
 
 @code {
 
+#nullable disable // Para quitar el aviso de nulls
+    public string Filtro;
 
-    [Parameter]
-    public int InventarioId { get; set; }
-    #nullable disable // Para quitar el aviso de nulls
+    public string Criterio;
 
     public Articulo inventarioArticulos = new Articulo();
-
-    public string descripcion { get; set; }
 
     public double CantidadNueva { get; set; }
 
@@ -151,7 +173,6 @@
     Ventas venta = new Ventas();
     VentasDetalle Detalle = new VentasDetalle();
     Articulo articulo = new Articulo();
-
     public string descripción { get; set; }
 
     public List<Articulo> ArticuloList { get; set; } = new List<Articulo>();
@@ -170,10 +191,6 @@
 
     List<Categoria> CategoriaList = new List<Categoria>();
 
-    public string Filtro;
-
-    public string Criterio;
-
 
     //-----------------------------------------------------------------------
 
@@ -184,18 +201,15 @@
         ArticuloList = articuloBLL.GetList(c => true);
         VentasList = ventaBLL.GetList(c => true);
 
-        Filtro = "1";
-
-        if (InventarioId > 0)
-        {
-            inventarioArticulos.ArticuloId = InventarioId;
-            this.Buscar();
-        }
+        Filtro = "0";
+ 
+        this.Buscar();
+        
     }
 
     public void Guardar() // Guardar articulo
     {
-        var articulo2 = articuloBLL.Guardar(inventarioArticulos);;
+        var articulo2 = articuloBLL.Guardar(inventarioArticulos); ;
 
         ActualizandoUnidadesArticulo();
 
@@ -222,7 +236,7 @@
             // Las unidades que se sumaron
             venta.Existencia = auxArticulo.CantidadComprada;
             bool Articulosss = articuloBLL.Guardar(auxArticulo);
-            venta.Existencia = auxArticulo.CantidadComprada + Detalle.Cantidad; 
+            venta.Existencia = auxArticulo.CantidadComprada + Detalle.Cantidad;
 
             CantidadActualizada = auxArticulo.CantidadComprada + CantidadNueva;
         }
@@ -242,17 +256,36 @@
 
     private void Buscar()
     {
+        ArticuloList = new List<Articulo>();
+        articulo = new Articulo();
+
         if (Criterio != null)
         {
             switch (Filtro)
             {
                 case "1":
                     ArticuloList = articuloBLL.GetList(e => e.ArticuloId == int.Parse(Criterio));
-                    if (ArticuloList != null)
+                    if(ArticuloList != null)
                     {
                         ObtenerDatosArticulo();
                     }
                     break;
+
+                /* Estos campos realizan una excepcion al buscar por su criterio (Esta en proceso de reparacion)*/
+                @* case "2":
+                    ArticuloList = articuloBLL.GetList(e => e.Nombre.ToLower().Contains(Criterio.ToLower()));
+                    if(ArticuloList != null)
+                    {
+                        ObtenerDatosArticulo();
+                    }
+                    break; 
+                case "3":
+                    ArticuloList = articuloBLL.GetList(e => e.Categoria.Descripcion.ToLower().Contains(Criterio.ToLower()));
+                    if(ArticuloList != null)
+                    {
+                        ObtenerDatosArticulo();
+                    }
+                    break;  *@
             }
         }
     }
