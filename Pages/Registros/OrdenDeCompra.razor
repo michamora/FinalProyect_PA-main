@@ -14,16 +14,19 @@
     <DataAnnotationsValidator />
 
     <a type="button" class="rz-border-radius-4 shadow border border-4 btn-lg btn btn-warning" data-toggle="tooltip"
-       data-placement="right" title="Regresar al registro de compra" href="compras">
+        data-placement="right" title="Regresar al registro de compra" href="compras">
         <i class="oi oi-arrow-circle-left" />
     </a>
+    <p/>
 
 
     <div class="card-header justify-content-center text-center bg-ordendecompra2">
         <h3 class="card-title">
             Orden de Compras
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
             </svg>
         </h3>
     </div>
@@ -47,8 +50,7 @@
                     Articulo
                     <div class="oi oi-cart"></div>
                 </label>
-                <select @bind="ArticuloSeleccionado" class="form-select text-14"
-                        @onfocusout="ObtenerDatosArticulo">
+                <select @bind="ArticuloSeleccionado" class="form-select text-14" @onfocusout="ObtenerDatosArticulo">
                     <option value="0" disabled selected> Seleccione un articulo </option>
                     @foreach (Articulo item in ArticuloList)
                     {
@@ -62,8 +64,10 @@
             <div class="form-group col-md-3">
                 <label>
                     Suplidor
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
-                        <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-truck" viewBox="0 0 16 16">
+                        <path
+                            d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
                     </svg>
                 </label>
                 <select @bind="articulo.SuplidorId" class="form-select text-14">
@@ -114,10 +118,12 @@
                     </button>
                     <label>ㅤ</label>
 
-                   <button type="submit" class="btn btn-lg btn-Comprar"  title="Comprar articulo">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
-            </svg><span> Comprar</span>
+                    <button type="submit" class="btn btn-lg btn-Comprar" title="Comprar articulo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5V8z" />
+                        </svg><span> Comprar</span>
                     </button>
 
                 </div>
@@ -155,7 +161,8 @@
                         @foreach (var item in lista)
                         {
                             FechaArticuloRegistrado = DateOnly.FromDateTime(item.FechaCreacion);
-                            @if (item.FechaCreacion.Month == FechaArticuloRegistrado.Month && item.FechaCreacion.Year == FechaArticuloRegistrado.Year && item.CantidadRegistrada < 50)
+                            @if (item.FechaCreacion.Month == FechaArticuloRegistrado.Month && item.FechaCreacion.Year ==
+                           FechaArticuloRegistrado.Year && item.CantidadRegistrada < 50)
                             {
                                 descripcion = categoriaBLL.Buscar(item.CategoriaId);
                                 if (descripcion == null) break;
@@ -171,8 +178,7 @@
                                     <td class="border border-3">@item.FechaCreacion.ToString("dd/MM/yyyy")</td>
 
                                     <td class="border border-3">
-                                        <a class="btn btn-sm btn-outline-success oi oi-eye"
-                                           href="articulo/@item.ArticuloId">
+                                        <a class="btn btn-sm btn-outline-success oi oi-eye" href="articulo/@item.ArticuloId">
                                         </a>
                                     </td>
                                 </tr>
@@ -188,9 +194,9 @@
 
 @code {
 
-    #nullable disable // Para quitar el aviso de nulls
+#nullable disable // Para quitar el aviso de nulls
 
-     [Parameter]
+    [Parameter]
     public int OrdencompraId { get; set; }
 
     public Articulo ordencompra = new Articulo();
@@ -273,7 +279,7 @@
             articulo.CantidadRegistrada = auxArticulo.CantidadRegistrada;
         }
 
-       
+
     }
 
 
@@ -296,9 +302,9 @@
             Toast.ShowWarning("Ingrese la cantidad a comprar.");
             return;
         }
-    
-        
-        if (articulo.CantidadComprada > articulo.CantidadRegistrada ) // Validacion
+
+
+        if (articulo.CantidadComprada > articulo.CantidadRegistrada) // Validacion
         {
             Toast.ShowWarning("La cantidad ingresada no puede ser mayor a la cantidad de almacen.");
             return;
@@ -310,7 +316,7 @@
             return;
         }
 
-        
+
         if (articulo.Precio < articulo.Costo)
         {
             Toast.ShowWarning("El precio debe ser mayor al costo"); // Validacion
@@ -327,7 +333,7 @@
             articulo = new Articulo();
             suplidor = new Suplidor();
             ArticuloSeleccionado = 0;
-        
+
             Toast.ShowSuccess($"Compra exitosa");
 
         }
@@ -336,7 +342,7 @@
     }
 
 
-    
+
 }
 
 
