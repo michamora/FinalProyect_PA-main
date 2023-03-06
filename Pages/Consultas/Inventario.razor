@@ -47,7 +47,7 @@
                                    placeholder="Ingrese el criterio de busqueda"/>
                     </div>
 
-                    <button type="button"  class="btn btn-consulta" @onclick="Buscar" title="Buscar articulo" >
+                    <button type="button" class="btn btn-consulta" @onclick="Buscar" title="Buscar articulo" >
                         <i class="oi oi-grid-four-up mr-2"/>
                     </button>
                 </div>
@@ -72,28 +72,31 @@
 
                                 <th class="border border-3">Código de barra</th>
 
-                                <th class="border border-3">Descripción Articulo</th>
+                                <th class="border border-3">Categoria</th>
 
                                 <th class="border border-3">Cantidad</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            @if (ArticuloList is not null){
+                           
                             @foreach (var item in ArticuloList)
                             {
                                 if (Criterio == item.ArticuloId.ToString())
-                                {
+                                { 
+                                    Mostrado();
+                                    descripcion = categoriaBLL.Buscar(item.CategoriaId);
+                                    if (descripcion == null) break;
                                     <tr class="text-center ">
                                         <td class="border border-3">@item.ArticuloId</td>
 
-                                        <td class="border border-3">@item.Nombre</td>
+                                        <td class="border border-3">@descripcion.Descripcion</td>
 
                                         <td class="border border-3">@item.CantidadRegistrada</td>
                                     </tr>
                                 }
                             }
-                            }
+                            
                         </tbody>
                     </table>
                     <hr />
@@ -106,10 +109,9 @@
                         </svg></label>
                     <div class="form-group col-2">
                         <InputNumber @bind-Value="articulo.CantidadAumentada" class="form-control bg-fondoinventario"/>
+                        <ValidationMessage For="@(() => articulo.CantidadAumentada)" />
                     </div>
                     <p />
-
-                   
 
 
                     <div class="from-group col-2" style="margin:auto">
@@ -117,7 +119,7 @@
                     </div>
 
                     <div class="form-group col" style="margin:auto">
-                        <button type="button" class="btn btn-consulta shadow" @onclick="Actualizar" title="Actualizar cantidad">
+                        <button type="submit" class="btn btn-consulta shadow" @onclick="Actualizar" title="Actualizar cantidad">
                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor"
                                 class="bi bi-hammer" viewBox="0 0 16 16">
                                 <path
@@ -165,15 +167,12 @@
     //-----------------------------------
     Articulo articulo = new Articulo();
 
-    public double CantidadAumentada { get; set; }
-
-    public double CantidadRegistrada { get; set; }
-
-    public string Nombre { get; set; }
-
-    public double cantidadalmacenada { get; set; }
-
     List<Articulo> ArticuloList = new List<Articulo>();
+
+    Categoria descripcion  = new Categoria();
+
+    [Inject]
+    public CategoriaBLL categoriaBLL { get; set; }
 
     [Inject]
     public ArticuloBLL articuloBLL { get; set; } // Inyectando BLL
@@ -185,8 +184,6 @@
     {
         articulo = new Articulo();
         ArticuloList = articuloBLL.GetList(c => true);
-        
-       
  
        if (ArticuloId > 0)
         {
@@ -196,27 +193,34 @@
         
     }
 
+    public void Mostrado(){
+
+     Articulo auxArticulo = articuloBLL.Buscar(int.Parse(Criterio));
+
+        if (auxArticulo != null)
+        {           
+            articulo.Nombre = auxArticulo.Nombre;
+            articulo.CantidadRegistrada = auxArticulo.CantidadRegistrada;                   
+        }
+    }
+
      private void ActualizandoUnidadesArticulo()
     {
         Articulo auxArticulo = articuloBLL.Buscar(int.Parse(Criterio));
 
         if (auxArticulo != null)
-        {
-            
-            
-           articulo.CantidadRegistrada = articulo.CantidadAumentada + auxArticulo.CantidadRegistrada;
-            
+        {                      
+           
+           articulo.CantidadAumentada += auxArticulo.CantidadRegistrada;          
         }
     }
-
 
     public void Actualizar() // Guardar articulo
     {
         
-
-        if (Nombre == string.Empty)
+        if (articulo.Nombre == string.Empty)
         {
-            Toast.ShowWarning("Clic en el boton consultar");
+            Toast.ShowWarning("Debe consultar el articulo");
             return;
         }
         if (articulo.CantidadAumentada == 0)
@@ -231,21 +235,12 @@
             return;
         }
 
-
         var articulo2 = articuloBLL.Guardar(articulo); ;
-
         
         if (articulo2)
         { 
-
-             Articulo auxArticulo = articuloBLL.Buscar(int.Parse(Criterio));
-
-        if (auxArticulo != null)
-        {
-            articulo.ArticuloId = auxArticulo.ArticuloId;
-            articulo.Nombre = auxArticulo.Nombre;
-            articulo.CantidadRegistrada = auxArticulo.CantidadRegistrada;
-           ActualizandoUnidadesArticulo();
+            
+            ActualizandoUnidadesArticulo();
             articulo = new Articulo();
     
             Toast.ShowSuccess("Articulo actualizado");
@@ -253,28 +248,26 @@
         else
         {
             articulo2 = false;
-            Toast.ShowWarning("Ha ocurrido un error");
-        }
-            
-        }
-            
-            
+            Toast.ShowWarning("Ha ocurrido un error");       
+        }                 
     }
-
-   
 
     public void Buscar(){
 
-     Articulo auxArticulo = articuloBLL.Buscar(int.Parse(Criterio));
-
-        if (auxArticulo != null)
+    if (this.articulo.ArticuloId > 0)
         {
-            
-            articulo.Nombre = auxArticulo.Nombre;
-            articulo.CantidadRegistrada = auxArticulo.CantidadRegistrada;
-            
-           
-            
+            var Articulo = articuloBLL.Buscar(articulo.ArticuloId);
+
+            if (Articulo != null)
+            {
+                articulo = Articulo;
+
+                Toast.ShowSuccess($"Articulo: {articulo.Nombre}, encontrado ");
+            }
+            else
+            {
+                Toast.ShowWarning($"No existe un articulo con este Id: {articulo.ArticuloId}");
+            }
         }
     }
 }
