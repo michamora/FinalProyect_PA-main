@@ -47,7 +47,7 @@
                                    placeholder="Ingrese el criterio de busqueda"/>
                     </div>
 
-                    <button type="button" class="btn btn-consulta" @onclick="Buscar" title="Buscar articulo" >
+                    <button type="button"  class="btn btn-consulta" @onclick="Buscar" title="Buscar articulo" >
                         <i class="oi oi-grid-four-up mr-2"/>
                     </button>
                 </div>
@@ -57,7 +57,7 @@
 
                     <div class="form-group col-3">
                         <label>Descripción Articulo</label>
-                        <InputText @bind-Value="Nombre" placeholder="Descripción articulo" class="form-control"
+                        <InputText @bind-Value="articulo.Nombre" placeholder="Descripción articulo" class="form-control"
                             readOnly="true" />
                     </div>
 
@@ -105,28 +105,19 @@
                                 d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434L7.752.066ZM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567L4.25 7.504ZM7.5 9.933l-2.75 1.571v3.134l2.75-1.571V9.933Zm1 3.134 2.75 1.571v-3.134L8.5 9.933v3.134Zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567-2.742 1.567Zm2.242-2.433V3.504L8.5 5.076V8.21l2.75-1.572ZM7.5 8.21V5.076L4.75 3.504v3.134L7.5 8.21ZM5.258 2.643 8 4.21l2.742-1.567L8 1.076 5.258 2.643ZM15 9.933l-2.75 1.571v3.134L15 13.067V9.933ZM3.75 14.638v-3.134L1 9.933v3.134l2.75 1.571Z" />
                         </svg></label>
                     <div class="form-group col-2">
-                        <InputNumber @bind-Value="CantidadAumentada" class="form-control bg-fondoinventario"/>
+                        <InputNumber @bind-Value="articulo.CantidadAumentada" class="form-control bg-fondoinventario"/>
                     </div>
                     <p />
 
-                    <label>Sumar Cantidad <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                            fill="currentColor" class="bi bi-patch-plus" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z" />
-                            <path
-                                d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z" />
-                        </svg></label>
-                    <div class="form-group col-2" style="margin:auto">
-                        <InputNumber @bind-Value="CantidadAumentada" class="form-control bg-fondoinventario"/>
-                    </div>
+                   
 
 
                     <div class="from-group col-2" style="margin:auto">
-                        <InputNumber @bind-Value="CantidadRegistrada" class="form-control" readOnly="true" />
+                        <InputNumber @bind-Value="articulo.CantidadRegistrada" class="form-control" readOnly="true" />
                     </div>
 
                     <div class="form-group col" style="margin:auto">
-                        <button type="submit" class="btn btn-consulta shadow" title="Actualizar cantidad">
+                        <button type="button" class="btn btn-consulta shadow" @onclick="Actualizar" title="Actualizar cantidad">
                             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor"
                                 class="bi bi-hammer" viewBox="0 0 16 16">
                                 <path
@@ -167,9 +158,9 @@
     [Parameter]
     public int ArticuloId { get; set; }
 
-    public string Filtro;
+    public string Filtro ="0";
 
-    public string Criterio;
+    public string Criterio = string.Empty;
 
     //-----------------------------------
     Articulo articulo = new Articulo();
@@ -195,8 +186,7 @@
         articulo = new Articulo();
         ArticuloList = articuloBLL.GetList(c => true);
         
-        Filtro = "0";
-        Criterio = string.Empty;
+       
  
        if (ArticuloId > 0)
         {
@@ -214,28 +204,30 @@
         {
             
             
-            ObtenerDatosArticulo();
+           articulo.CantidadRegistrada = articulo.CantidadAumentada + auxArticulo.CantidadRegistrada;
             
         }
     }
 
+
     public void Actualizar() // Guardar articulo
     {
-        if (Filtro == "0")
+        
+
+        if (Nombre == string.Empty)
         {
-            Toast.ShowWarning("Seleccione un filtro de busqueda");
+            Toast.ShowWarning("Clic en el boton consultar");
             return;
         }
-
-        if (Criterio == string.Empty)
-        {
-            Toast.ShowWarning("Ingrese un criterio de busqueda");
-            return;
-        }
-
-        if (CantidadAumentada == 0)
+        if (articulo.CantidadAumentada == 0)
         {
             Toast.ShowWarning("Ingrese la cantidad que desea aumentar");
+            return;
+        }
+
+        if (articulo.CantidadRegistrada == 0)
+        {
+            Toast.ShowWarning("Consulte el articulo");
             return;
         }
 
@@ -245,7 +237,15 @@
         
         if (articulo2)
         { 
-            ActualizandoUnidadesArticulo();
+
+             Articulo auxArticulo = articuloBLL.Buscar(int.Parse(Criterio));
+
+        if (auxArticulo != null)
+        {
+            articulo.ArticuloId = auxArticulo.ArticuloId;
+            articulo.Nombre = auxArticulo.Nombre;
+            articulo.CantidadRegistrada = auxArticulo.CantidadRegistrada;
+           ActualizandoUnidadesArticulo();
             articulo = new Articulo();
     
             Toast.ShowSuccess("Articulo actualizado");
@@ -255,57 +255,26 @@
             articulo2 = false;
             Toast.ShowWarning("Ha ocurrido un error");
         }
+            
+        }
+            
+            
     }
 
    
 
-    private void ObtenerDatosArticulo() // Obteniendo los datos del articulo buscado
-    {
-        Articulo auxArticulo = articuloBLL.Buscar(int.Parse(Criterio));
+    public void Buscar(){
+
+     Articulo auxArticulo = articuloBLL.Buscar(int.Parse(Criterio));
 
         if (auxArticulo != null)
         {
-            Nombre = auxArticulo.Nombre; // Obteniendo el nombre del articulo
-            CantidadRegistrada = auxArticulo.CantidadRegistrada; 
-            CantidadAumentada = auxArticulo.CantidadAumentada;
             
-
-        }
-    }
-
-    private void Buscar()
-    {
-        ArticuloList = new List<Articulo>();
-        articulo = new Articulo();
-
-        if (Criterio != null)
-        {
-            switch (Filtro)
-            {
-                case "1":
-                    ArticuloList = articuloBLL.GetList(e => e.ArticuloId == int.Parse(Criterio));
-                    if(ArticuloList != null)
-                    {
-                        ObtenerDatosArticulo();
-                    }
-                    break;
-
-                /* Estos campos realizan una excepcion al buscar por su criterio (Esta en proceso de reparacion)*/
-                @* case "2":
-                    ArticuloList = articuloBLL.GetList(e => e.Nombre.ToLower().Contains(Criterio.ToLower()));
-                    if(ArticuloList != null)
-                    {
-                        ObtenerDatosArticulo();
-                    }
-                    break; 
-                case "3":
-                    ArticuloList = articuloBLL.GetList(e => e.Categoria.Descripcion.ToLower().Contains(Criterio.ToLower()));
-                    if(ArticuloList != null)
-                    {
-                        ObtenerDatosArticulo();
-                    }
-                    break;  *@
-            }
+            articulo.Nombre = auxArticulo.Nombre;
+            articulo.CantidadRegistrada = auxArticulo.CantidadRegistrada;
+            
+           
+            
         }
     }
 }

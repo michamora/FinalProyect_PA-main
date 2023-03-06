@@ -263,6 +263,12 @@
             Toast.ShowWarning("Ingrese un precio de venta");
             return;
         }
+
+        if (articulo.Precio < articulo.Costo)
+        {
+            Toast.ShowWarning("Ingrese un precio de venta mayor al costo");
+            return;
+        }
         
         var articulo2 = articuloBLL.ExisteNombre(articulo.Nombre);
         if (articulo2 == null) //si no existe
