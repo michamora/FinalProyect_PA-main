@@ -7,9 +7,15 @@
 
 @inject IToastService Toast
 
+@inject CategoriaBLL categoriaBLL
+
+@inject SuplidorBLL suplidorBLL
+
+@inject ArticuloBLL articuloBLL
+
 @using BLL
 
-<EditForm Model="articulo" >
+<EditForm Model="articulo">
     <DataAnnotationsValidator />
 
     <a type="button" class="rz-border-radius-4 shadow border border-4 btn-lg btn btn-warning" data-toggle="tooltip"
@@ -17,7 +23,6 @@
         <i class="oi oi-arrow-circle-left" />
     </a>
     <p/>
-
 
     <div class="card-header justify-content-center text-center bg-ordendecompra2">
         <h3 class="card-title">
@@ -196,28 +201,14 @@
 
 @code {
 
-#nullable disable // Para quitar el aviso de nulls
+    [Parameter]
+    public int ArticuloId { get; set; }
 
     Articulo articulo = new Articulo();
 
     Suplidor suplidor = new Suplidor();
 
     Categoria descripcion  = new Categoria();
-
-
-    [Parameter]
-    public int ArticuloId { get; set; }
-
-
-    [Inject]
-    public ArticuloBLL articuloBLL { get; set; } // Inyectando BLL
-
-    [Inject]
-    public SuplidorBLL suplidorBLL { get; set; }
-
-
-    [Inject]
-    public CategoriaBLL categoriaBLL { get; set; } // Inyectando BLLS
 
     List<Articulo> ArticuloList = new List<Articulo>();
 
@@ -232,7 +223,7 @@
         ArticuloList = articuloBLL.GetList(c => true);
         SuplidorList = suplidorBLL.GetList(c => true);
         
-         if (ArticuloId > 0)
+        if (ArticuloId > 0)
         {
             articulo.ArticuloId = ArticuloId;
             this.Buscar();
@@ -260,8 +251,6 @@
             articulo.Costo = auxArticulo.Costo;
             
         }
-
-
     }
 
     private void ActualizandoUnidades() // Obteniendo los datos del articulo seleccionado
@@ -274,8 +263,6 @@
             auxArticulo.CantidadRegistrada -= articulo.CantidadComprada;
             
         }
-
-
     }
 
 
