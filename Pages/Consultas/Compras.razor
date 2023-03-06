@@ -1,6 +1,5 @@
 @page "/compras"
 
-
 @* Registro de compras *@
 
 @inject AuthenticationStateProvider Authentication
@@ -9,7 +8,7 @@
 
 @using BLL
 
-<EditForm Model="articulo">
+<EditForm Model="articulo" OnValidSubmit="Comprar">
     <DataAnnotationsValidator />
 
     <div class="form-group col-3">
@@ -227,7 +226,7 @@
     public void Comprar() // Guardar articulo
     {
 
-         if (articulo.Nombre == string.Empty)
+        if (articulo.Nombre == string.Empty)
         {
             Toast.ShowWarning("Ingrese el nombre del articulo");
             return;
