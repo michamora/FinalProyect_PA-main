@@ -86,6 +86,23 @@ namespace ProyectoFinal.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Inventario",
+                columns: table => new
+                {
+                    InventarioId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ArticuloId = table.Column<int>(type: "INTEGER", nullable: false),
+                    DescripcionArticulo = table.Column<string>(type: "TEXT", nullable: true),
+                    NuevaCantidad = table.Column<double>(type: "REAL", nullable: false),
+                    CantidadRegistrada = table.Column<double>(type: "REAL", nullable: false),
+                    Estado = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inventario", x => x.InventarioId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Pago",
                 columns: table => new
                 {
@@ -269,7 +286,8 @@ namespace ProyectoFinal.Migrations
                     Costo = table.Column<decimal>(type: "TEXT", nullable: false),
                     Precio = table.Column<decimal>(type: "TEXT", nullable: false),
                     Estado = table.Column<bool>(type: "INTEGER", nullable: false),
-                    UsuarioId = table.Column<int>(type: "INTEGER", nullable: false)
+                    UsuarioId = table.Column<int>(type: "INTEGER", nullable: false),
+                    InventarioId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -280,6 +298,11 @@ namespace ProyectoFinal.Migrations
                         principalTable: "Categoria",
                         principalColumn: "CategoriaId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Articulo_Inventario_InventarioId",
+                        column: x => x.InventarioId,
+                        principalTable: "Inventario",
+                        principalColumn: "InventarioId");
                     table.ForeignKey(
                         name: "FK_Articulo_Suplidor_SuplidorId",
                         column: x => x.SuplidorId,
@@ -365,6 +388,11 @@ namespace ProyectoFinal.Migrations
                 name: "IX_Articulo_CategoriaId",
                 table: "Articulo",
                 column: "CategoriaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Articulo_InventarioId",
+                table: "Articulo",
+                column: "InventarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Articulo_SuplidorId",
@@ -461,6 +489,9 @@ namespace ProyectoFinal.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categoria");
+
+            migrationBuilder.DropTable(
+                name: "Inventario");
 
             migrationBuilder.DropTable(
                 name: "Suplidor");
