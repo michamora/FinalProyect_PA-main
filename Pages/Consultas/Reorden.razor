@@ -8,7 +8,7 @@
 <EditForm Model="lista">
 
     <a type="button" class="rz-border-radius-4 shadow border border-4 btn-lg btn btn-warning" data-toggle="tooltip"
-       data-placement="right" title="Regresar al inventario" href="inventarioArticulos">
+       data-placement="right" title="Regresar al inventario" href="inventario">
         <i
             class="oi oi-arrow-circle-left"/>
     </a>
@@ -51,7 +51,7 @@
                     descripcion = categoriaBLL.Buscar(item.CategoriaId);
                     @if (descripcion == null) break;
 
-                    @if (item.CantidadComprada <= 50 ) 
+                    @if (item.CantidadComprada <= 50 && item.Precio > 0) 
                 {
                     <tr class="text-center">
                         <td class="border border-3">@item.ArticuloId</td>
@@ -65,7 +65,7 @@
                         <td class="border border-3">
                             <a class="btn btn-sm btn-reorden oi oi-cart" data-toggle="tooltip"
                                data-placement="right" title="Realizar compra"
-                               href="inventarioArticulos/@item.ArticuloId">
+                               href="compras">
                             </a>
                         </td>
                        

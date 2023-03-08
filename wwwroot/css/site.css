@@ -26,6 +26,20 @@ a, .btn-link {
     border-color: #5286d4;
 }
 
+.btn-refrescar {
+    color: #fff;
+    background-color: #286ace;
+    border-color: #233e68;
+    border-radius: 23px;
+    
+}
+
+.btn-refrescar:hover{
+    color: #fff;
+    background-color: #5483ca;
+    border-color: #233e68;
+}
+
 .btn-ordendecompra {
     color: #fff;
     background-color: #8096fa;

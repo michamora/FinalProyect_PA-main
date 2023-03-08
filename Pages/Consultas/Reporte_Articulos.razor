@@ -50,6 +50,8 @@
 
                 <th class="border border-3">Cantidad</th>
 
+                <th class="border border-3">Cantidad Aumentada</th>
+
                 <th class="border border-3">Costo</th>
             </tr>
             </thead>
@@ -63,7 +65,7 @@
             {
                 @foreach (var item in lista)
                 {
-                        if(item.CantidadRegistrada > 0)
+                        if(item.CantidadComprada < 1)
                 {
                     
                      descripcion = categoriaBLL.Buscar(item.CategoriaId);
@@ -77,6 +79,8 @@
                         <td class="border border-3">@descripcion.Descripcion</td>
 
                         <td class="border border-3">@item.CantidadRegistrada</td>
+
+                        <td class="border border-3">@item.CantidadAumentada</td>
 
                         <td class="border border-3">@item.Costo</td>
 
@@ -127,7 +131,7 @@
             {
                 @foreach (var item in lista)
                 {
-                    if(item.CantidadComprada > 0)
+                    if(item.CantidadComprada> 0 && item.Precio > 0)
                 {
                    
                   descripcion = categoriaBLL.Buscar(item.CategoriaId);

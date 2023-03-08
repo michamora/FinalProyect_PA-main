@@ -31,46 +31,49 @@
                    
                 <div class="input-group d-flex align-items-end">
 
-                    <div class="form-group col-md-2.5">
-                        <label>Filtro</label>
-                        <InputSelect class="form-select text-14" @bind-Value="Filtro">
-                            <option value="0" disabled selected>Seleccione un filtro</option>
-                            <option value="1">Codigo</option>
-                            <option value="2" disabled selected>Categoria</option>
-                            <option value="3" disabled selected>Descripción Articulo</option>
-                        </InputSelect>
-                    </div>
 
-                    <div class="Form-group col-3">
-                        <label>Criterio</label>
-                        <InputText class="form-control" @bind-Value="Criterio"
+                    <div class="Form-group col-2">
+                        <label>Codigo Articulo</label>
+                        
+                        <InputNumber class="form-control" @bind-Value="articulo.ArticuloId"
                                    placeholder="Ingrese el criterio de busqueda"/>
                     </div>
 
-                    <button type="button" class="btn btn-consulta" @onclick="Buscar" title="Buscar articulo" >
-                        <i class="oi oi-grid-four-up mr-2"/>
+                    <button type="button" class="btn btn-consulta"  @onclick="Buscar" title="Buscar articulo" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+</svg>
                     </button>
+                    
                 </div>
                     
-                    <p />
+                   
+                     
 
-
-                    <div class="form-group col-3">
+                    <div class="form-group col-3"> <br>
                         <label>Descripción Articulo</label>
-                        <InputText @bind-Value="Nombre" placeholder="Descripción articulo" class="form-control"
+                        <InputText @bind-Value="articulo.Nombre" placeholder="Descripción articulo" class="form-control"
                             readOnly="true" />
                     </div>
 
                     <p />
                     <p />
                     <hr>
+                  <div class="text-center">
+                    <h4>
+                    Articulos registrados
+                    
+                </h4>
+                </div>
 
                     <table
                         class="justify-content-center shadow 4 rz-border-radius-4 table table-light table-striped table-bordered">
                         <thead class="thead">
                             <tr class="text-center justify-content-center table bg-inventariocolor">
 
-                                <th class="border border-3">Código de barra</th>
+                                <th class="border border-3">Código</th>
+
+                                <th class="border border-3">Nombre</th>
 
                                 <th class="border border-3">Categoria</th>
 
@@ -82,25 +85,34 @@
                            
                             @foreach (var item in ArticuloList)
                             {
-                                if (Criterio == item.ArticuloId.ToString())
-                                { 
-                                    Mostrado();
+                                 if(item.CantidadRegistrada > 1 && item.Precio < 1)
+                {
+                               
                                     descripcion = categoriaBLL.Buscar(item.CategoriaId);
                                     if (descripcion == null) break;
                                     <tr class="text-center ">
                                         <td class="border border-3">@item.ArticuloId</td>
 
+                                        <td class="border border-3">@item.Nombre</td>
+
                                         <td class="border border-3">@descripcion.Descripcion</td>
 
                                         <td class="border border-3">@item.CantidadRegistrada</td>
+
                                     </tr>
-                                }
+                }
                             }
                             
                         </tbody>
                     </table>
-                    <hr />
-                    <p />
+                    <hr/>
+                    
+
+                    <label>Cantidad </label>
+                    <div class="form-group col-2">
+                        <InputNumber @bind-Value="articulo.CantidadRegistrada" readOnly="true" class="form-control "/>
+                         <br/>
+                    </div>
 
                     <label>Nueva Cantidad <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                             fill="currentColor" class="bi bi-boxes" viewBox="0 0 16 16">
@@ -108,15 +120,13 @@
                                 d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434L7.752.066ZM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567L4.25 7.504ZM7.5 9.933l-2.75 1.571v3.134l2.75-1.571V9.933Zm1 3.134 2.75 1.571v-3.134L8.5 9.933v3.134Zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567-2.742 1.567Zm2.242-2.433V3.504L8.5 5.076V8.21l2.75-1.572ZM7.5 8.21V5.076L4.75 3.504v3.134L7.5 8.21ZM5.258 2.643 8 4.21l2.742-1.567L8 1.076 5.258 2.643ZM15 9.933l-2.75 1.571v3.134L15 13.067V9.933ZM3.75 14.638v-3.134L1 9.933v3.134l2.75 1.571Z" />
                         </svg></label>
                     <div class="form-group col-2">
-                        <InputNumber @bind-Value="CantidadNueva" class="form-control bg-fondoinventario"/>
+                        <InputNumber @bind-Value="NuevaCantidad" class="form-control bg-fondoinventario"/>
                         
                     </div>
-                    <p />
+                   
 
 
-                    <div class="from-group col-2" style="margin:auto">
-                        <InputNumber @bind-Value="CantidadRegistrada" class="form-control" readOnly="true" />
-                    </div>
+                    
 
                     <div class="form-group col" style="margin:auto">
                         <button type="submit" class="btn btn-consulta shadow" @onclick="Actualizar" title="Actualizar cantidad">
@@ -127,8 +137,20 @@
                             </svg> <span>Actualizar</span>  
                         </button>
 
+                         <label>ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</label>
+                          
+                        <button type="button" class="btn btn-lg btn-refrescar" @onclick="Refrescar" title="Refrescar el inventario">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+  <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+  <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+</svg>
+                        </button>
+
+                        <label>ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</label>
+           
+
                         <a data-toggle="tooltip"
-       data-placement="right" title="Realizar reorden" href="reorden" class="stretched-link text-consulta" style="position: absolute; top:0; right:0; margin-right: 20px; margin-top: 510px;">
+       data-placement="right" title="Realizar reorden" href="reorden" class="text-consulta">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-chat-left-text" viewBox="0 0 16 16">
                                 <path
@@ -160,15 +182,7 @@
     [Parameter]
     public int ArticuloId { get; set; }
 
-    public double CantidadNueva { get; set; }
-
-    public double CantidadRegistrada { get; set; }
-
-    public string Nombre { get; set; }
-
-    public string Filtro ="0";
-
-    public string Criterio = string.Empty;
+    public double NuevaCantidad { get; set; }
 
     //-----------------------------------
     Articulo articulo = new Articulo();
@@ -190,7 +204,6 @@
     {
         articulo = new Articulo();
         ArticuloList = articuloBLL.GetList(c => true);
-        CantidadNueva=0;
  
        if (ArticuloId > 0)
         {
@@ -200,41 +213,50 @@
         
     }
 
-    public void Mostrado(){
-
-     Articulo auxArticulo = articuloBLL.Buscar(int.Parse(Criterio));
-
-        if (auxArticulo != null)
-        {           
-            Nombre = auxArticulo.Nombre;
-            CantidadRegistrada = auxArticulo.CantidadRegistrada;                   
-        }
+    public void Refrescar() // Refrescar inventario
+    {
+        articulo = new Articulo();
+        ArticuloList = articuloBLL.GetList(c => true);
     }
+
 
      private void ActualizandoUnidadesArticulo()
     {
            
-            articulo.CantidadAumentada = CantidadNueva + CantidadRegistrada;                 
+            articulo.CantidadAumentada = NuevaCantidad;  
+            articulo.CantidadRegistrada += articulo.CantidadAumentada;               
         
     }
 
     public void Actualizar() // Guardar articulo
     {
-        
-        if (CantidadNueva == 0)
+         if (articulo.Nombre == string.Empty)
         {
-            Toast.ShowWarning("Ingrese la nueva cantidad");
+            Toast.ShowWarning("Consulte un articulo");
             return;
         }
-        
 
+         if (articulo.CantidadRegistrada == 0)
+        {
+            Toast.ShowWarning("Consulte un articulo");
+            return;
+        }
+
+         if (NuevaCantidad == 0)
+        {
+            Toast.ShowWarning("Ingrese la cantidad que desea aumentar");
+            return;
+        }
+
+        ActualizandoUnidadesArticulo();
         var articulo2 = articuloBLL.Guardar(articulo); ;
         
         if (articulo2)
         { 
-            
-            ActualizandoUnidadesArticulo();
+
             articulo = new Articulo();
+            NuevaCantidad = 0;
+            
     
             Toast.ShowSuccess("Articulo actualizado");
         }
@@ -246,14 +268,18 @@
     }
 
     public void Buscar(){
+        
 
     if (this.articulo.ArticuloId > 0)
         {
             var Articulo = articuloBLL.Buscar(articulo.ArticuloId);
+            
 
             if (Articulo != null)
             {
                 articulo = Articulo;
+
+                
 
                 Toast.ShowSuccess($"Articulo: {articulo.Nombre}, encontrado ");
             }

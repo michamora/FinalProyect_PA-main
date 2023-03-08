@@ -11,7 +11,7 @@ using ProyectoFinal.Data;
 namespace ProyectoFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230307220242_inicial")]
+    [Migration("20230308022903_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -176,9 +176,6 @@ namespace ProyectoFinal.Migrations
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("InventarioId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -195,8 +192,6 @@ namespace ProyectoFinal.Migrations
                     b.HasKey("ArticuloId");
 
                     b.HasIndex("CategoriaId");
-
-                    b.HasIndex("InventarioId");
 
                     b.HasIndex("SuplidorId");
 
@@ -295,32 +290,6 @@ namespace ProyectoFinal.Migrations
                     b.HasKey("ClienteId");
 
                     b.ToTable("Clientes");
-                });
-
-            modelBuilder.Entity("ProyectoFinal.Models.Inventario", b =>
-                {
-                    b.Property<int>("InventarioId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ArticuloId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("CantidadRegistrada")
-                        .HasColumnType("REAL");
-
-                    b.Property<string>("DescripcionArticulo")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("Estado")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("NuevaCantidad")
-                        .HasColumnType("REAL");
-
-                    b.HasKey("InventarioId");
-
-                    b.ToTable("Inventario");
                 });
 
             modelBuilder.Entity("ProyectoFinal.Models.Pago", b =>
@@ -613,10 +582,6 @@ namespace ProyectoFinal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProyectoFinal.Models.Inventario", null)
-                        .WithMany("articulo")
-                        .HasForeignKey("InventarioId");
-
                     b.HasOne("ProyectoFinal.Models.Suplidor", "Suplidor")
                         .WithMany()
                         .HasForeignKey("SuplidorId")
@@ -654,11 +619,6 @@ namespace ProyectoFinal.Migrations
                     b.Navigation("articulo");
 
                     b.Navigation("venta");
-                });
-
-            modelBuilder.Entity("ProyectoFinal.Models.Inventario", b =>
-                {
-                    b.Navigation("articulo");
                 });
 
             modelBuilder.Entity("ProyectoFinal.Models.Ventas", b =>
