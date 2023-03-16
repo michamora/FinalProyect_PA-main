@@ -275,19 +275,18 @@
             var Articulo = articuloBLL.Buscar(articulo.ArticuloId);
             
 
-            if (Articulo != null)
+            if (Articulo != null && Articulo.Precio < 1)
             {
                 articulo = Articulo;
-
-                
 
                 Toast.ShowSuccess($"Articulo: {articulo.Nombre}, encontrado ");
             }
             else
-            {
+                
                 Toast.ShowWarning($"No existe un articulo con este Id: {articulo.ArticuloId}");
-            }
-        }
+            
+            }     
+        
     }
 }
 

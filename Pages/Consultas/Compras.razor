@@ -1,5 +1,7 @@
 @page "/compras"
 
+@page "/compras/{ArticuloId:int}"
+
 @* Registro de compras *@
 
 @inject AuthenticationStateProvider Authentication
@@ -181,7 +183,6 @@
     Articulo articulo = new Articulo();
 
     Suplidor suplidor = new Suplidor();
-
 
     [Parameter]
     public int ArticuloId { get; set; }
