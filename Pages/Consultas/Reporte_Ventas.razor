@@ -28,7 +28,7 @@
         <table class="shadow 4 rz-border-radius-4 table table-light table-striped table-bordered">
             <thead class="thead">
             <tr class="text-center table bg-reportecolor">
-                <th class="border border-3">Código</th>
+                <th class="border border-3">Numero de venta</th>
 
                 <th class="border border-3">Fecha Venta</th>
 
@@ -40,7 +40,7 @@
 
                 <th class="border border-3">Total</th>
 
-                <th class="border border-3">Ver</th>
+                
             </tr>
             </thead>
             <tbody>
@@ -54,7 +54,7 @@
                 @foreach (Ventas item in listaventas)
                 {
                     <tr class="text-center">
-                        <td class="border border-3">@item.VentaId</td>
+                        <td class="border border-3">000-@item.VentaId</td>
 
                         <td class="border border-3">@item.Fecha</td>
 
@@ -66,11 +66,7 @@
 
                         <td class="border border-3">RD$ @item.Total</td>
 
-                        <td class="border border-3">
-                            <a class="btn btn-sm btn-outline-success oi oi-eye"
-                               href="ventas/@item.VentaId">
-                            </a>
-                        </td>
+                       
                     </tr>
                 }
             }

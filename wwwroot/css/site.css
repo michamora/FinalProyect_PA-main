@@ -176,6 +176,19 @@ a, .btn-link {
     border-color: #693e99;
 }
 
+.btn-outline-consulta {
+    color: #ffffff;
+    background-color: #9a55e9;
+    border-color: #693e99;
+    border-radius: 17px;
+}
+
+.btn-outline-consulta:hover{
+    color: #fff;
+    background-color: #7029c2;
+    border-color: #693e99;
+}
+
 .btn-reorden {
     color: #ffffff;
     background-color: #fc6060;
@@ -240,6 +253,11 @@ a, .btn-link {
 .text-notas:hover {
     color: #8f8f8f;
     
+}
+
+.border-reorden{
+    color: #ff0000;
+    background-color: #ff0000;
 }
 
 .content {

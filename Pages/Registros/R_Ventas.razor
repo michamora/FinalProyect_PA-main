@@ -221,7 +221,7 @@
                 @*...................... Reporte Ventas ......................*@
 
                 <div class="form-group col-md-3" style="margin: auto;">
-                    <a class="rz-border-radius-4 shadow border border-4 btn btn-lg btn btn-warning"
+                    <a class="rz-border-radius-4 shadow border border-1 btn btn-lg btn btn-warning"
                         data-toggle="tooltip" data-placement="right" title="Ingresar al reporte de ventas"
                         href="reporteventas"
                         style="position: absolute; top:0;  right:0; margin-right: 10px; margin-top: 490px;">
@@ -274,6 +274,7 @@
     Ventas venta = new Ventas();
     VentasDetalle Detalle = new VentasDetalle();
     Articulo articulo = new Articulo();
+    Clientes clientes = new Clientes();
 
     public int ArticuloSeleccionado { get; set; }
 
@@ -319,6 +320,7 @@
 
     protected override void OnInitialized()
     {
+     
         ArticuloList = articuloBLL.GetList(p => true);
         ClienteList = clienteBLL.GetList(p => true);
         MetodoPagoList = pagoBLL.GetList(c => true);
@@ -489,8 +491,8 @@
         {
             var Venta = ventaBLL.Buscar(this.venta.VentaId);
 
-            if (Venta != null)
-            {
+            if (Venta != null )
+            { 
                 venta = Venta;
 
                 Toast.ShowSuccess($"Venta : {venta.VentaId}, encontrada");

@@ -44,8 +44,10 @@
             </tr>
             </thead>
             <tbody>
+               
             @foreach (var item in lista)
             {
+               
                 @if (item.CantidadComprada > 0 ) 
                 {
                     descripcion = categoriaBLL.Buscar(item.CategoriaId);
@@ -60,18 +62,19 @@
 
                         <td class="border border-3">@descripcion.Descripcion</td>
 
-                        <td class="border border-3">@item.CantidadComprada</td>
+                        <td class="border-reorden">@item.CantidadComprada</td>
 
                         <td class="border border-3">
                             <a class="btn btn-sm btn-reorden oi oi-cart" data-toggle="tooltip"
                                data-placement="right" title="Realizar compra"
-                               href="compras/@item.ArticuloId">
+                               href="comprasreorden/@item.ArticuloId">
                             </a>
                         </td>
                        
                     </tr>
                 }
                 }
+            
             }
             </tbody>
         </table>

@@ -5,9 +5,11 @@
 
 <EditForm Model="lista">
 
-    <a type="button" class="rz-border-radius-4 shadow border border-4 btn-lg btn btn-warning" data-toggle="tooltip"
-       data-placement="right" title="Regresar al formulario" href="articulo">
-        <i class="oi oi-arrow-circle-left"/>
+    <a type="button" class="rz-border-radius-1 shadow border border-1 btn-lg btn btn-warning" data-toggle="tooltip"
+       data-placement="right" title="Registrar nuevo producto" href="articulo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+               <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                              </svg>
     </a>
     <br/>
     <p/>
@@ -119,7 +121,7 @@
 
                         <td>@item.FechaCreacion.ToString("dd/MM/yyyy")</td>
                         <td>
-                            <a class="btn btn-sm btn-outline-success oi oi-eye" href="articulo/@item.ArticuloId"></a>
+                            <a class="btn btn-sm btn-outline-primary oi oi-eye" href="consultarcompras/@item.ArticuloId"></a>
                         </td>
                     </tr>
                 }
