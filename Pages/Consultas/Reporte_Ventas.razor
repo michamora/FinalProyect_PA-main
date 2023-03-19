@@ -7,73 +7,99 @@
 <EditForm Model="listaventas">
 
     <a type="button" class="rz-border-radius-4 shadow border border-4 btn-lg btn btn-warning" data-toggle="tooltip"
-       data-placement="right" title="Regresar al formulario" href="ventas">
-        <i class="oi oi-arrow-circle-left"/>
+        data-placement="right" title="Regresar al formulario" href="ventas">
+        <i class="oi oi-arrow-circle-left" />
     </a>
-    <br/>
-    <p/>
+    <br />
+    <p />
 
     <div class="card shadow border border-4 rz-border-radius-4 card-footer d-flex justify-content-center">
 
-        <p/>
+        <p />
         <div class="card-header rz-border-radius-4 shadow text-center">
             <h4>
                 Ventas
                 <div class="oi oi-cart"></div>
             </h4>
         </div>
+    </div>
+    <p/>
+    <div class="card shadow border border-4 rz-border-radius-4 card-footer d-flex justify-content-center">
 
-        <p/>
+        <div class="card-header rz-border-radius-4 shadow">
+            <div class="form-group col-md-3">
+                <InputSelect class="form-select text-14" @bind-Value="Filtro">
+                    <option value="0" disabled selected>Seleccione un filtro</option>
+                    <option value="1">Nombre</option>
+
+                </InputSelect>
+                <br>
+            </div>
+            <div class="Form-group col-md-1"></div>
+
+            <div class="Form-group col-3">
+                <label>Criterio</label>
+                <InputText class="form-control" @bind-Value="Criterio" placeholder="Ingrese el criterio de busqueda" />
+            </div>
+            <div class="form-group col"
+                style="position: absolute; top:0; right:0; margin-right: 750px; margin-top: 102px; ">
+                <button type="button" class="btn btn-consulta" @onclick="Consultar" title="Consultar Clientes">
+                    <i class="oi oi-grid-four-up mr-2" /> Consultar
+                </button>
+            </div>
+        </div>
+
+        <p />
         <hr>
         <table class="shadow 4 rz-border-radius-4 table table-light table-striped table-bordered">
             <thead class="thead">
-            <tr class="text-center table bg-reportecolor">
-                <th class="border border-3">Numero de venta</th>
+                <tr class="text-center table bg-reportecolor">
+                    <th class="border border-3">Numero de venta</th>
 
-                <th class="border border-3">Fecha Venta</th>
+                    <th class="border border-3">Fecha Venta</th>
 
-                <th class="border border-3">Unidades vendidas</th>
+                    <th class="border border-3">Unidades vendidas</th>
 
-                <th class="border border-3">SubTotal</th>
+                    <th class="border border-3">SubTotal</th>
 
-                <th class="border border-3">ITBIS</th>
+                    <th class="border border-3">ITBIS</th>
 
-                <th class="border border-3">Total</th>
+                    <th class="border border-3">Total</th>
 
-                
-            </tr>
+
+                </tr>
             </thead>
             <tbody>
-            @if (listaventas.Count == 0)
-            {
-                <p/>
-                <span>Empty</span>
-            }
-            else
-            {
-                @foreach (Ventas item in listaventas)
+                @if (listaventas.Count == 0)
                 {
-                    <tr class="text-center">
-                        <td class="border border-3">000-@item.VentaId</td>
-
-                        <td class="border border-3">@item.Fecha</td>
-
-                        <td class="border border-3">@item.UnidadesVendidas</td>
-
-                        <td class="border border-3">RD$ @item.SubTotal</td>
-
-                        <td class="border border-3">@item.ITBIS</td>
-
-                        <td class="border border-3">RD$ @item.Total</td>
-
-                       
-                    </tr>
+                    <p />
+                    <span>Empty</span>
                 }
-            }
+                else
+                {
+                    @foreach (Ventas item in listaventas)
+                    {
+                        <tr class="text-center">
+                            <td class="border border-3">000-@item.VentaId</td>
+
+                            <td class="border border-3">@item.Fecha</td>
+
+                            <td class="border border-3">@item.UnidadesVendidas</td>
+
+                            <td class="border border-3">RD$ @item.SubTotal</td>
+
+                            <td class="border border-3">@item.ITBIS</td>
+
+                            <td class="border border-3">RD$ @item.Total</td>
+
+
+                        </tr>
+                    }
+                }
             </tbody>
         </table>
     </div>
-    <p/>
+    <p />
 </EditForm>
 
 @code {
@@ -87,6 +113,9 @@
     public List<Articulo> articuloList { get; set; } = new List<Articulo>();
 
     public Ventas ventas { get; set; } = new Ventas();
+
+    public string Filtro;
+    public string Criterio;
 
     public Articulo Articulo { get; set; }
 
@@ -102,4 +131,22 @@
         articuloList = articuloBLL.GetList(e => true);
     }
 
+    private void Consultar()
+    {
+        listaventas = new List<Ventas>();
+        ventas = new Ventas();
+
+        listaventas = ventasBLL.GetList(e => true);
+
+        if (Criterio != null)
+        {
+            switch (Filtro)
+            {
+                case "1": // Nombre suplidor
+                    break;
+
+            }
+        }
+
+    }
 }
