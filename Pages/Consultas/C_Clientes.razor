@@ -4,28 +4,36 @@
 
 @using Models;
 @using ProyectoFinal.BLL
+@using Syncfusion.Blazor.Grids
 
 <EditForm Model="lista">
 
     <a type="button" class="rz-border-radius-4 shadow border border-1 btn-lg btn btn-warning" data-toggle="tooltip"
-       data-placement="right" title="Registrar nuevo cliente" href="clientes">
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
-                            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
-                        </svg>
+        data-placement="right" title="Registrar nuevo cliente" href="clientes">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-people-fill"
+            viewBox="0 0 16 16">
+            <path
+                d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+        </svg>
     </a>
-    <br/>
-    <p/>
+    <br />
+    <p />
 
     <div class="card ">
 
         <div class="card-header">
             <h4>
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
-                    <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                    <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                    class="bi bi-card-checklist" viewBox="0 0 16 16">
+                    <path
+                        d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                    <path
+                        d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z" />
                 </svg> Consulta Clientes
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
-                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                    class="bi bi-people-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
                 </svg>
             </h4>
         </div>
@@ -40,7 +48,7 @@
                             <option value="0">Id</option>
                             <option value="1">Nombre</option>
                             <option value="2">Email</option>
-                             <option value="3">Celular</option>
+                            <option value="3">Celular</option>
                             <option value="4">Telefono</option>
                         </InputSelect>
                     </div>
@@ -49,11 +57,11 @@
                     <div class="Form-group col-3">
                         <label>Criterio</label>
                         <InputText class="form-control" @bind-Value="Criterio"
-                                   placeholder="Ingrese el criterio de busqueda"/>
+                            placeholder="Ingrese el criterio de busqueda" />
                     </div>
 
                     <button type="button" class="btn btn-consulta" @onclick="Consultar" title="Consultar clientes">
-                        <i class="oi oi-grid-four-up mr-2"/> Consultar
+                        <i class="oi oi-grid-four-up mr-2" /> Consultar
                     </button>
                 </div>
                 <hr>
@@ -62,90 +70,95 @@
 
                     <div class="Form-group col-2">
                         <span class="form-group ">Desde</span>
-                        <InputDate @bind-Value="fechaDesde" class="form-control"/>
+                        <InputDate @bind-Value="fechaDesde" class="form-control" />
                     </div>
 
 
                     <div class="Form-group col-2">
                         <span class="form-group">Hasta</span>
-                        <InputDate @bind-Value="fechaHasta" class="form-control"/>
+                        <InputDate @bind-Value="fechaHasta" class="form-control" />
                     </div>
                 </div>
             </form>
         </div>
+        
 
         <table class="table table-light table-striped table-bordered">
             <thead class="thead">
-            <tr class="table">
+                <tr class="table">
 
-                <th>Id</th>
+                    <th>Id</th>
 
-                <th>Nombre</th>
+                    <th>Nombre</th>
 
-                <th>Email</th>
+                    <th>Email</th>
 
-                <th>Teléfono</th>
+                    <th>Teléfono</th>
 
-                <th>
-                    Celular
-                    <div class="oi oi-phone"></div>
-                </th>
+                    <th>
+                        Celular
+                        <div class="oi oi-phone"></div>
+                    </th>
 
-                <th>
-                    Dirección
-                    <div class="oi oi-map-marker"></div>
-                </th>
+                    <th>
+                        Dirección
+                        <div class="oi oi-map-marker"></div>
+                    </th>
 
-                <th>
-                    Cédula
-                    <div class="oi oi-credit-card"></div>
-                </th>
+                    <th>
+                        Cédula
+                        <div class="oi oi-credit-card"></div>
+                    </th>
 
 
-                <th>Editar</th>
+                    <th>Editar</th>
 
-            </tr>
+                </tr>
             </thead>
             <tbody>
-            @if (lista.Count == 0)
-            {
-                <span>Empty</span>
-            }
-            else
-            {
-                @foreach (var item in lista)
+                @if (lista.Count == 0)
                 {
-                    <tr>
-                        <td>@item.ClienteId</td>
-
-                        <td>@item.Nombre</td>
-
-                        <td>@item.Email</td>
-
-                        <td>@item.Telefono</td>
-
-                        <td>@item.Celular</td>
-
-                        <td>@item.Direccion</td>
-
-                        <td>@item.Cedula</td>
-
-                     
-
-                        <td>
-                            <a type="button" class="rz-border-radius-1 shadow border border-1 btn-lg btn btn-primary" data-toggle="tooltip"
-       data-placement="right" title="Editar informacion" href="clientes/@item.ClienteId">
-        
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-</svg>
-    </a>
-                        
-                        </td>
-                    </tr>
+                    <span>Empty</span>
                 }
-            }
+                else
+                {
+                    @foreach (var item in lista)
+                    {
+                        <tr>
+                            <td>@item.ClienteId</td>
+
+                            <td>@item.Nombre</td>
+
+                            <td>@item.Email</td>
+
+                            <td>@item.Telefono</td>
+
+                            <td>@item.Celular</td>
+
+                            <td>@item.Direccion</td>
+
+                            <td>@item.Cedula</td>
+
+
+
+                            <td>
+                                <a type="button" class="rz-border-radius-1 shadow border border-1 btn-lg btn btn-primary"
+                                    data-toggle="tooltip" data-placement="right" title="Editar informacion"
+                                    href="clientes/@item.ClienteId">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                        class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd"
+                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                    </svg>
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+                }
             </tbody>
         </table>
     </div>

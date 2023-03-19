@@ -110,9 +110,18 @@
 
                     <label>Cantidad </label>
                     <div class="form-group col-2">
-                        <InputNumber @bind-Value="articulo.CantidadRegistrada" readOnly="true" class="form-control "/>
+                        <InputNumber @bind-Value="CantidadMostrada" readOnly="true" class="form-control "/>
                          <br/>
                     </div>
+
+                    <div class="form-group col" style="margin:auto">
+                        <button type="submit" class="btn btn-consulta shadow" @onclick="AumentarUnidadesArticulo" title="Actualizar cantidad">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+</svg> 
+                        </button>
+                    </div>
+                    
 
                     <label>Nueva Cantidad <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                             fill="currentColor" class="bi bi-boxes" viewBox="0 0 16 16">
@@ -121,12 +130,8 @@
                         </svg></label>
                     <div class="form-group col-2">
                         <InputNumber @bind-Value="NuevaCantidad" class="form-control bg-fondoinventario"/>
-                        
                     </div>
                    
-
-
-                    
 
                     <div class="form-group col" style="margin:auto">
                         <button type="submit" class="btn btn-consulta shadow" @onclick="Actualizar" title="Actualizar cantidad">
@@ -184,6 +189,8 @@
 
     public double NuevaCantidad { get; set; }
 
+    public double CantidadMostrada { get; set; }
+
     //-----------------------------------
     Articulo articulo = new Articulo();
 
@@ -220,12 +227,17 @@
     }
 
 
-     private void ActualizandoUnidadesArticulo()
+    private void AumentarUnidadesArticulo()
+    {   CantidadMostrada += 1;
+        
+    }
+    private void ActualizandoUnidadesArticulo()
     {
            
-            articulo.CantidadAumentada = NuevaCantidad;  
-            articulo.CantidadRegistrada += articulo.CantidadAumentada;               
-        
+           if(NuevaCantidad > 0){
+            articulo.CantidadRegistrada = NuevaCantidad;  
+            articulo.CantidadAumentada = 0;             
+           }
     }
 
     public void Actualizar() // Guardar articulo
@@ -242,13 +254,13 @@
             return;
         }
 
-         if (NuevaCantidad == 0)
-        {
-            Toast.ShowWarning("Ingrese la cantidad que desea aumentar");
-            return;
-        }
-
+         
+        articulo.CantidadRegistrada = CantidadMostrada; 
+        articulo.CantidadAumentada = CantidadMostrada;
+        if(NuevaCantidad > 0) {
         ActualizandoUnidadesArticulo();
+        }
+         
         var articulo2 = articuloBLL.Guardar(articulo); ;
         
         if (articulo2)
@@ -256,7 +268,7 @@
 
             articulo = new Articulo();
             NuevaCantidad = 0;
-            
+            CantidadMostrada = 0;
     
             Toast.ShowSuccess("Articulo actualizado");
         }
@@ -268,12 +280,12 @@
     }
 
     public void Buscar(){
-        
+    
 
     if (this.articulo.ArticuloId > 0)
         {
             var Articulo = articuloBLL.Buscar(articulo.ArticuloId);
-            
+            CantidadMostrada = articulo.CantidadRegistrada;
 
             if (Articulo != null && Articulo.Precio < 1)
             {
