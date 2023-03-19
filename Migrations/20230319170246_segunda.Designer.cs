@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoFinal.Data;
 
@@ -10,9 +11,10 @@ using ProyectoFinal.Data;
 namespace ProyectoFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230319170246_segunda")]
+    partial class segunda
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
@@ -208,8 +210,6 @@ namespace ProyectoFinal.Migrations
                     b.HasKey("ArticuloId");
 
                     b.HasIndex("CategoriaId");
-
-                    b.HasIndex("SuplidorId");
 
                     b.ToTable("Articulo");
                 });
@@ -598,15 +598,7 @@ namespace ProyectoFinal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ProyectoFinal.Models.Suplidor", "Suplidor")
-                        .WithMany()
-                        .HasForeignKey("SuplidorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Categoria");
-
-                    b.Navigation("Suplidor");
                 });
 
             modelBuilder.Entity("ProyectoFinal.Models.Ventas", b =>

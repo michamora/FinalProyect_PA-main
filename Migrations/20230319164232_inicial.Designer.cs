@@ -11,7 +11,7 @@ using ProyectoFinal.Data;
 namespace ProyectoFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230308022903_inicial")]
+    [Migration("20230319164232_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -173,12 +173,27 @@ namespace ProyectoFinal.Migrations
                     b.Property<bool>("Estado")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Estatus")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ITBIS")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MetodoPago")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<double>("NumeroOrden")
+                        .HasColumnType("REAL");
 
                     b.Property<decimal>("Precio")
                         .HasColumnType("TEXT");

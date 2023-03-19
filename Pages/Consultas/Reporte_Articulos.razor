@@ -46,8 +46,6 @@
 
                 <th class="border border-3">Categoria</th>
 
-               
-
                 <th class="border border-3">Cantidad</th>
 
                 <th class="border border-3">Cantidad Aumentada</th>
@@ -65,7 +63,7 @@
             {
                 @foreach (var item in lista)
                 {
-                        if(item.CantidadComprada < 1)
+                        if(item.CantidadRegistrada > 0)
                 {
                     
                      descripcion = categoriaBLL.Buscar(item.CategoriaId);
@@ -145,7 +143,7 @@
 
                         <td class="border border-3">@descripcion.Descripcion</td>
 
-                        <td class="border border-3">@item.CantidadComprada</td>
+                        <td class="border-cantidadcomprada">@item.CantidadComprada</td>
 
                         <td class="border border-3">@item.Costo</td>        
 

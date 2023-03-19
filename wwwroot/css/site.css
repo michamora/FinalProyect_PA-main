@@ -260,6 +260,11 @@ a, .btn-link {
     background-color: #ff0000;
 }
 
+.border-cantidadcomprada{
+    color: #32a354;
+    background-color: #53ee82;
+}
+
 .content {
     padding-top: 1.1rem;
 }
@@ -271,6 +276,7 @@ a, .btn-link {
 .invalid {
     outline: 1px solid red;
 }
+
 
 .validation-message {
     color: red;
@@ -311,3 +317,5 @@ a, .btn-link {
         float: left;
         
     }
+
+    

@@ -85,7 +85,7 @@
                            
                             @foreach (var item in ArticuloList)
                             {
-                                 if(item.CantidadRegistrada > 1 && item.Precio < 1)
+                                 if(item.CantidadRegistrada > 0)
                 {
                                
                                     descripcion = categoriaBLL.Buscar(item.CategoriaId);
@@ -228,7 +228,8 @@
 
 
     private void AumentarUnidadesArticulo()
-    {   CantidadMostrada += 1;
+    {  
+         CantidadMostrada += 1;
         
     }
     private void ActualizandoUnidadesArticulo()
@@ -254,9 +255,12 @@
             return;
         }
 
-         
+        
+        articulo.CantidadAumentada = articulo.CantidadRegistrada - CantidadMostrada + CantidadMostrada;
         articulo.CantidadRegistrada = CantidadMostrada; 
-        articulo.CantidadAumentada = CantidadMostrada;
+        articulo.CantidadAumentada = articulo.CantidadRegistrada - articulo.CantidadAumentada;
+       
+
         if(NuevaCantidad > 0) {
         ActualizandoUnidadesArticulo();
         }
@@ -287,7 +291,7 @@
             var Articulo = articuloBLL.Buscar(articulo.ArticuloId);
             CantidadMostrada = articulo.CantidadRegistrada;
 
-            if (Articulo != null && Articulo.Precio < 1)
+            if (Articulo != null && Articulo.CantidadRegistrada > 0)
             {
                 articulo = Articulo;
 

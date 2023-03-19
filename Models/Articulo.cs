@@ -29,9 +29,26 @@ namespace ProyectoFinal.Models
         [Range(minimum: 1, maximum: int.MaxValue, ErrorMessage = "Seleccione la categoria del articulo.")] 
         public int CategoriaId { get; set; }
 
+        [Required(ErrorMessage = "Metodo de pago es obligatorio.")]
+        [Range(minimum: 1, maximum: int.MaxValue, ErrorMessage = "Seleccione el metodo de pago.")] 
+        public int PagoId { get; set; }
+
         [Required]
         [Range(1, float.MaxValue, ErrorMessage = "Ingrese la cantidad del articulo.")]
         public double CantidadRegistrada { get; set; }
+
+        [Required]
+        [Range(1, float.MaxValue, ErrorMessage = "Ingrese el numero de orden.")]
+        public double NumeroOrden { get; set; }
+
+        [Required(ErrorMessage = "Seleccione el metodo de pago.")]
+        public string MetodoPago { get; set; }
+
+        [Required(ErrorMessage = "Seleccione el ITBIS.")]
+        public string ITBIS { get; set; }
+
+        [Required(ErrorMessage = "Seleccione el metodo de pago.")]
+        public string Estatus { get; set; }
 
         [Required]
         [Range(1, float.MaxValue, ErrorMessage = "Ingrese la cantidad a comprar del articulo.")]
@@ -59,6 +76,7 @@ namespace ProyectoFinal.Models
         [ForeignKey("CategoriaId")]
         public virtual Categoria Categoria { get; set; }
 
+        [ForeignKey("SuplidorId")]
         public virtual Suplidor Suplidor { get; set; }
 
         public Articulo()
@@ -67,12 +85,17 @@ namespace ProyectoFinal.Models
             UsuarioId = 0; 
             SuplidorId = 0;
             CategoriaId = 0;
+            PagoId = 0;
             Nombre = string.Empty;
             FechaCreacion = DateTime.Now;
             CantidadRegistrada = 0;
             CantidadComprada = 0;
             Costo = 0;
             Precio = 0;
+            NumeroOrden = 0;
+            MetodoPago ="";
+            ITBIS = "";
+            Estatus = "";
         }     
     }
 }
