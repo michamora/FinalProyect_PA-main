@@ -15,6 +15,7 @@ public class ApplicationDbContext : IdentityDbContext<Usuarios,IdentityRole<int>
     public DbSet<Usuarios> Usuarios { get; set; }
     public DbSet<Clientes> Clientes { get; set; }
     public DbSet<Articulo> Articulo { get; set; }
+    //
 
     public DbSet<Ventas> Ventas { get; set; }
     public DbSet<Categoria> Categoria { get; set; }
