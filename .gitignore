@@ -1,6 +1,6 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
+﻿######################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio Code. #
+######################################################################################
 
 /GestionObras.Api/obj/**
 /GestionObras.Api/bin/**
