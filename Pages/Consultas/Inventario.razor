@@ -5,7 +5,7 @@
 
 @inject IToastService Toast
 
-@using BLL
+@using ProyectoFinal.BLL;
 
 <EditForm Model="articulo" OnValidSubmit="Actualizar">
     <DataAnnotationsValidator />
@@ -44,8 +44,8 @@
   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
 </svg>
                     </button>
-                    <a type="button" class="rz-border-radius-1 shadow border border-1 btn-lg btn btn-Inventario"
-            style="position: absolute; top:0;  right:0; margin-right: 25px; margin-top: 10px;" data-toggle="tooltip"
+                    <a type="button" class="rz-border-radius-1 shadow border border-1 btn-lg btn btn-warning"
+            style="position: absolute;  right:40px; margin-right: 30; "
             data-placement="right" title="Reporte de articulos" href="reportearticulos"><span>Articulos</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                 class="bi bi-minecart-loaded" viewBox="0 0 16 16">
@@ -95,9 +95,7 @@
                            
                             @foreach (var item in ArticuloList)
                             {
-                                 if(item.CantidadRegistrada > 0)
-                {
-                               
+                                
                                     descripcion = categoriaBLL.Buscar(item.CategoriaId);
                                     if (descripcion == null) break;
                                     <tr class="text-center ">
@@ -111,7 +109,7 @@
 
                                     </tr>
                 }
-                            }
+                            
                             
                         </tbody>
                     </table>
@@ -125,7 +123,7 @@
                     </div>
 
                     <div class="form-group col" style="margin:auto">
-                        <button type="submit" class="btn btn-consulta shadow" @onclick="AumentarUnidadesArticulo" title="Actualizar cantidad">
+                        <button type="submit" class="btn btn-consulta shadow" @onclick="AumentarUnidadesArticulo" title="Aumentar cantidad">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
 </svg> 
@@ -177,13 +175,14 @@
                             Deseas realizar un reorden de articulos?
 
                         </a>
-
+        
                     </div>
                     <p/>
-
+               <hr>
                 </div>
+                
             </div>
-
+             
         </div>
     </div>
 </EditForm>
@@ -259,11 +258,7 @@
             return;
         }
 
-         if (articulo.CantidadRegistrada == 0)
-        {
-            Toast.ShowWarning("Consulte un articulo");
-            return;
-        }
+        
 
         
         articulo.CantidadAumentada = articulo.CantidadRegistrada - CantidadMostrada + CantidadMostrada;
@@ -299,11 +294,9 @@
     if (this.articulo.ArticuloId > 0)
         {
             var Articulo = articuloBLL.Buscar(articulo.ArticuloId);
-            CantidadMostrada = articulo.CantidadRegistrada;
-
-            if (Articulo != null && Articulo.CantidadRegistrada > 0)
-            {
+            
                 articulo = Articulo;
+                CantidadMostrada = articulo.CantidadRegistrada;
 
                 Toast.ShowSuccess($"Articulo: {articulo.Nombre}, encontrado ");
             }
@@ -311,7 +304,7 @@
                 
                 Toast.ShowWarning($"No existe un articulo con este Id: {articulo.ArticuloId}");
             
-            }     
+                
         
     }
 }

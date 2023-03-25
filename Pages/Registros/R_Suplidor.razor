@@ -8,7 +8,7 @@
 
 @inject IToastService Toast
 
-@using BLL
+@using ProyectoFinal.BLL;
 
 <EditForm Model="suplidor" OnValidSubmit="Guardar">
     <DataAnnotationsValidator />
@@ -121,8 +121,8 @@
                     @*...................... Descripción Articulo ......................*@
 
                     <div class="form-group col-3">
-                        <label>Categoria de articulo</label>
-                        <InputText @bind-Value="suplidor.DescripcionArticulo" placeholder="Categoria de articulo"
+                        <label>Descripción de suplidor</label>
+                        <InputText @bind-Value="suplidor.DescripcionArticulo" placeholder="Descripción suplidor"
                             class="form-control" />
                         <ValidationMessage For="@(() => suplidor.DescripcionArticulo)" />
                     </div>

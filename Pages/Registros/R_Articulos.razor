@@ -8,7 +8,7 @@
 
 @inject IToastService Toast
 
-@using BLL
+@using ProyectoFinal.BLL;
 
 <EditForm Model="articulo">
     <DataAnnotationsValidator />
@@ -93,13 +93,7 @@
 
                 <div class="row">
 
-                    @*...................... Cantidad ......................*@
-
-                    <div class="form-group col-3">
-                        <label>Cantidad</label>
-                        <InputNumber @bind-Value="articulo.CantidadRegistrada" class="form-control" />
-                        <ValidationMessage For="@(() => articulo.CantidadRegistrada)" />
-                    </div>
+                  
 
                     <div class="form-group col-3">
                         <label>Costo / Unidad</label>
@@ -234,15 +228,6 @@
             return;
         }
 
-
-
-
-
-        if (articulo.CantidadRegistrada == 0)
-        {
-            Toast.ShowWarning("Ingresar una cantidad");
-            return;
-        }
 
         if (articulo.Costo == 0)
         {

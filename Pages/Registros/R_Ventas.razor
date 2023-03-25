@@ -9,7 +9,7 @@
 
 @inject IToastService Toast
 
-@using BLL
+@using ProyectoFinal.BLL;
 
 <EditForm Model="venta" OnValidSubmit="Guardar">
     <DataAnnotationsValidator />
@@ -215,17 +215,17 @@
                         <label>Devuelta</label>
                         <InputNumber @bind-Value="venta.MontoRestante" class="form-control col-5" readOnly="true" />
                     </div>
-                </div>
-                <br>
-
-                @*...................... Reporte Ventas ......................*@
+                
+                 
+               
+             @*...................... Reporte Ventas ......................*@
 
                 <div class="form-group col-md-3" style="margin: auto;">
                     <a class="rz-border-radius-4 shadow border border-1 btn btn-lg btn btn-warning"
                         data-toggle="tooltip" data-placement="right" title="Ingresar al reporte de ventas"
                         href="reporteventas"
-                        style="position: absolute; top:0;  right:0; margin-right: 10px; margin-top: 490px;">
-                        Ventas
+                        style="position: absolute;  right:40px; margin-right: 30; "
+                       <label>Ventas</label>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                             class="bi bi-shop" viewBox="0 0 16 16">
                             <path
@@ -233,7 +233,8 @@
                         </svg>
                     </a>
                 </div>
-                <p />
+                </div>
+                <br>
 
                 <hr>
 

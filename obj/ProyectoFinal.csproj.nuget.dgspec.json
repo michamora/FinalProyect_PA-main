@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jose Angel\\Desktop\\FinalProyect_PA-main\\ProyectoFinal.csproj": {}
+    "C:\\Users\\Michael\\Documents\\Proyecto Aplicado\\Proyecto\\FinalProyect_PA-main\\ProyectoFinal.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jose Angel\\Desktop\\FinalProyect_PA-main\\ProyectoFinal.csproj": {
+    "C:\\Users\\Michael\\Documents\\Proyecto Aplicado\\Proyecto\\FinalProyect_PA-main\\ProyectoFinal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jose Angel\\Desktop\\FinalProyect_PA-main\\ProyectoFinal.csproj",
+        "projectUniqueName": "C:\\Users\\Michael\\Documents\\Proyecto Aplicado\\Proyecto\\FinalProyect_PA-main\\ProyectoFinal.csproj",
         "projectName": "ProyectoFinal",
-        "projectPath": "C:\\Users\\Jose Angel\\Desktop\\FinalProyect_PA-main\\ProyectoFinal.csproj",
-        "packagesPath": "C:\\Users\\Jose Angel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jose Angel\\Desktop\\FinalProyect_PA-main\\obj\\",
+        "projectPath": "C:\\Users\\Michael\\Documents\\Proyecto Aplicado\\Proyecto\\FinalProyect_PA-main\\ProyectoFinal.csproj",
+        "packagesPath": "C:\\Users\\Michael\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Michael\\Documents\\Proyecto Aplicado\\Proyecto\\FinalProyect_PA-main\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Jose Angel\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Michael\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -58,10 +60,6 @@
               "target": "Package",
               "version": "[6.0.1, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[6.0.1, )"
-            },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[6.0.1, )"
@@ -97,29 +95,10 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.12, 6.0.12]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[6.0.12, 6.0.12]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.12, 6.0.12]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.12, 6.0.12]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -128,7 +107,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
