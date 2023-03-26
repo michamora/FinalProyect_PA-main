@@ -313,6 +313,9 @@ namespace ProyectoFinal.Migrations
                     b.Property<bool>("Estado")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("EstadoDeLaCompra")
+                        .HasColumnType("TEXT");
+
                     b.Property<double>("Existencia")
                         .HasColumnType("REAL");
 
@@ -387,6 +390,82 @@ namespace ProyectoFinal.Migrations
                     b.HasIndex("CompraId");
 
                     b.ToTable("CompraDetalle");
+                });
+
+            modelBuilder.Entity("ProyectoFinal.Models.EstadoCompra", b =>
+                {
+                    b.Property<int>("EstadoCompraId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Estado")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("EstadoDeCompra")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("EstadoCompraId");
+
+                    b.ToTable("EstadoCompra");
+
+                    b.HasData(
+                        new
+                        {
+                            EstadoCompraId = 1,
+                            Estado = true,
+                            EstadoDeCompra = "En espera"
+                        },
+                        new
+                        {
+                            EstadoCompraId = 2,
+                            Estado = true,
+                            EstadoDeCompra = "Solicitado"
+                        },
+                        new
+                        {
+                            EstadoCompraId = 3,
+                            Estado = true,
+                            EstadoDeCompra = "Finalizado"
+                        });
+                });
+
+            modelBuilder.Entity("ProyectoFinal.Models.EstadoVenta", b =>
+                {
+                    b.Property<int>("EstadoVentaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Estado")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("EstadoDeVenta")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("EstadoVentaId");
+
+                    b.ToTable("EstadoVenta");
+
+                    b.HasData(
+                        new
+                        {
+                            EstadoVentaId = 1,
+                            Estado = true,
+                            EstadoDeVenta = "En espera"
+                        },
+                        new
+                        {
+                            EstadoVentaId = 2,
+                            Estado = true,
+                            EstadoDeVenta = "Solicitado"
+                        },
+                        new
+                        {
+                            EstadoVentaId = 3,
+                            Estado = true,
+                            EstadoDeVenta = "Finalizado"
+                        });
                 });
 
             modelBuilder.Entity("ProyectoFinal.Models.Pago", b =>
@@ -541,6 +620,12 @@ namespace ProyectoFinal.Migrations
                     b.Property<bool>("Estado")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("EstadoDeLaVenta")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("EstadoVentaId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<double>("Existencia")
                         .HasColumnType("REAL");
 
@@ -572,6 +657,8 @@ namespace ProyectoFinal.Migrations
                         .HasColumnType("REAL");
 
                     b.HasKey("VentaId");
+
+                    b.HasIndex("EstadoVentaId");
 
                     b.HasIndex("PagoId");
 
@@ -720,9 +807,15 @@ namespace ProyectoFinal.Migrations
 
             modelBuilder.Entity("ProyectoFinal.Models.Ventas", b =>
                 {
+                    b.HasOne("ProyectoFinal.Models.EstadoVenta", "EstadoVenta")
+                        .WithMany()
+                        .HasForeignKey("EstadoVentaId");
+
                     b.HasOne("ProyectoFinal.Models.Pago", "Pago")
                         .WithMany()
                         .HasForeignKey("PagoId");
+
+                    b.Navigation("EstadoVenta");
 
                     b.Navigation("Pago");
                 });

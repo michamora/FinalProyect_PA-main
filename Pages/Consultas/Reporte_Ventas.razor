@@ -30,7 +30,7 @@
             <div class="form-group col-md-3">
                 <InputSelect class="form-select text-14" @bind-Value="Filtro">
                     <option value="0" disabled selected>Seleccione un filtro</option>
-                    <option value="1">Nombre</option>
+                    <option value="1">Numero de venta</option>
 
                 </InputSelect>
                 <br>
@@ -43,7 +43,7 @@
             </div>
             <div class="form-group col"
                 style="position: absolute; top:0; right:0; margin-right: 750px; margin-top: 102px; ">
-                <button type="button" class="btn btn-consulta" @onclick="Consultar" title="Consultar Clientes">
+                <button type="button" class="btn btn-consulta" @onclick="Consultar" title="Consultar ventas">
                     <i class="oi oi-grid-four-up mr-2" /> Consultar
                 </button>
             </div>
@@ -66,14 +66,16 @@
 
                     <th class="border border-3">Total</th>
 
+                    <th class="border border-3">Ver</th>
+
 
                 </tr>
             </thead>
             <tbody>
                 @if (listaventas.Count == 0)
                 {
-                    <p />
-                    <span>Empty</span>
+                    
+                    <td class="bg-colornohay">ㅤNo hay ventas registradas !</td>
                 }
                 else
                 {
@@ -91,6 +93,10 @@
                             <td class="border border-3">@item.ITBIS</td>
 
                             <td class="border border-3">RD$ @item.Total</td>
+
+                             <td>
+                            <a class="btn btn-sm btn-outline-primary oi oi-eye" href="consultarventas/@item.VentaId"></a>
+                        </td>
 
 
                         </tr>
@@ -142,7 +148,7 @@
         {
             switch (Filtro)
             {
-                case "1": // Nombre suplidor
+                case "1": listaventas = ventasBLL.GetList(e => e.VentaId == int.Parse(Criterio));
                     break;
 
             }

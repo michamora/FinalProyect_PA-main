@@ -49,6 +49,8 @@ builder.Services.AddTransient<VentasBLL>();
 builder.Services.AddTransient<ArticuloBLL>();
 builder.Services.AddTransient<PagoBLL>();
 builder.Services.AddTransient<CompraBLL>();
+builder.Services.AddTransient<EstadoVentaBLL>();
+builder.Services.AddTransient<EstadoCompraBLL>();
 
 
 

@@ -245,9 +245,26 @@ a, .btn-link {
 }
 
 .bg-notas {
-    color: #b9b9b9;
+    color: #b9b9b9; 
     
+}
+
+.bg-colornohay {
+    color: #bd0f0f; 
     
+}
+
+.btn-reporte {
+    color: #ffffff;
+    background-color:  #5db69b;
+    border-color:  #407767;
+    border-radius: 10px;
+}
+
+.btn-reporte:hover{
+    color: #ffffff;
+    background-color:  #4e8f7b;
+    border-color:  #407767;
 }
 
 .text-notas:hover {
@@ -263,6 +280,13 @@ a, .btn-link {
 .border-cantidadcomprada{
     color: #32a354;
     background-color: #53ee82;
+}
+
+.bg-estadoVenta{
+    
+    color: #296ba8;
+
+    border-color:  #a6a890;
 }
 
 .content {

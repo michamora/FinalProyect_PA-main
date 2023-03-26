@@ -95,6 +95,7 @@
                            
                             @foreach (var item in ArticuloList)
                             {
+                                if (item.Precio < 1){
                                 
                                     descripcion = categoriaBLL.Buscar(item.CategoriaId);
                                     if (descripcion == null) break;
@@ -109,7 +110,7 @@
 
                                     </tr>
                 }
-                            
+                            }
                             
                         </tbody>
                     </table>
@@ -233,6 +234,8 @@
     {
         articulo = new Articulo();
         ArticuloList = articuloBLL.GetList(c => true);
+        NuevaCantidad = 0;
+        CantidadMostrada = 0;
     }
 
 

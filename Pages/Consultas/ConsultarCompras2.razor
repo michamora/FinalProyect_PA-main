@@ -10,9 +10,8 @@
 
 @using ProyectoFinal.BLL;
 
-<EditForm Model="articulo">
+<EditForm Model="articulo" >
     <DataAnnotationsValidator />
-
      
 
     <div class="form-group col-3">
@@ -81,7 +80,7 @@
             <div class="form-group col-3">
                 <label>Nombre</label>
                 <InputText @bind-Value="articulo.Nombre" placeholder="Nombre articulo" class="form-control" disabled ="true" />
-                <ValidationMessage For="@(() => articulo.Nombre)" />
+                
 
             </div>
 
@@ -99,7 +98,7 @@
                         <option value="@item.CategoriaId">@item.Descripcion</option>
                     }
                 </InputSelect>
-                <ValidationMessage For="@(() => articulo.CategoriaId)" />
+                
             </div>
 
             <div class="form-group col-md-3">
@@ -118,7 +117,7 @@
                         <option value="@item.SuplidorId">@item.Nombre </option>
                     }
                 </InputSelect>
-                <ValidationMessage For="@(() => articulo.SuplidorId)" />
+                
                 <br>
             </div>
         </div>
@@ -132,7 +131,7 @@
             <div class="form-group col-3">
                 <label>Cantidad</label>
                 <InputNumber @bind-Value="articulo.CantidadComprada" class="form-control" disabled ="true"/>
-                <ValidationMessage For="@(() => articulo.CantidadComprada)" />
+                
             </div>
 
 
@@ -146,13 +145,20 @@
 
             <div class="form-group col-3">
                 <label>Precio</label>
-                <InputNumber @bind-Value="articulo.Precio" class="form-control" disabled ="true"/>
-                <ValidationMessage For="@(() => articulo.Precio)" />
+                <InputNumber @bind-Value="articulo.Precio" class="form-control" />
+                
                 <br>
             </div>
+          
+           <div class="form-group col" style="margin:auto"> 
+           <button type="button" class="btn btn-lg btn-success" @onclick="Actualizar" title="Actualizar articulo">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check-square-fill" viewBox="0 0 16 16">
+  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z"/>
+</svg>
+                        </button>
 
         </div>
-
+       </div>
             </div>
            
        
@@ -202,7 +208,37 @@
         }
     }
 
+public void Actualizar() // Guardar articulo
+    {
 
+        if (articulo.Precio < articulo.Costo)
+        {
+            Toast.ShowWarning("Ingrese un precio de venta mayor al costo");
+            return;
+        }
+
+        if (articulo.Precio == 0)
+        {
+            Toast.ShowWarning("Ingrese un precio de venta ");
+            return;
+        }
+        
+        bool guardado;
+
+       
+        guardado = articuloBLL.Guardar(articulo);
+
+        if (guardado)
+        {
+            guardado = true;
+            
+            
+
+            Toast.ShowSuccess("Articulo Actualizado correctamente");
+        }
+        else
+            Toast.ShowError("No fue posible realizar los cambios");
+    }
 
     public void Buscar() // Buscar articulo
     {

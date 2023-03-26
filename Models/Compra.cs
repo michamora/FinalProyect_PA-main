@@ -30,6 +30,8 @@ namespace ProyectoFinal.Models
 
         public bool Estado { get; set; } = true;
 
+        public string EstadoDeLaCompra { get; set; }
+
 
 
         //-------------------------------------------------------------------------------------
@@ -49,6 +51,7 @@ namespace ProyectoFinal.Models
             SubTotal = 0;
             Total = 0;
             Existencia = 0;
+            EstadoDeLaCompra = "";
 
             compraDetalle = new List<CompraDetalle>();
         }

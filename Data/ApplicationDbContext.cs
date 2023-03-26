@@ -20,6 +20,11 @@ public class ApplicationDbContext : IdentityDbContext<Usuarios,IdentityRole<int>
     public DbSet<Ventas> Ventas { get; set; }
     public DbSet<Categoria> Categoria { get; set; }
     public DbSet<Pago> Pago { get; set; }
+
+    public DbSet<EstadoVenta> EstadoVenta { get; set; }
+
+    public DbSet<EstadoCompra> EstadoCompra { get; set; }
+
     public DbSet<Suplidor> Suplidor { get; set; }
     protected override void OnModelCreating (ModelBuilder modelBuilder)
     {
@@ -39,6 +44,24 @@ public class ApplicationDbContext : IdentityDbContext<Usuarios,IdentityRole<int>
         new Pago { PagoId = 1, Metodo = "Deposito"},
         new Pago { PagoId = 2, Metodo = "Efectivo"},             // Metodos de pago
         new Pago { PagoId = 3, Metodo = "Tarjeta de credito"}
+        
+        );
+
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<EstadoVenta>().HasData(  
+
+        new EstadoVenta { EstadoVentaId = 1, EstadoDeVenta = "En espera"},
+        new EstadoVenta { EstadoVentaId = 2, EstadoDeVenta = "Solicitado"},       // Estados de venta
+        new EstadoVenta { EstadoVentaId = 3, EstadoDeVenta = "Finalizado"}
+        
+        );
+
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<EstadoCompra>().HasData(  
+
+        new EstadoCompra { EstadoCompraId = 1, EstadoDeCompra = "En espera"},
+        new EstadoCompra { EstadoCompraId = 2, EstadoDeCompra = "Solicitado"},       // Estados de compra
+        new EstadoCompra { EstadoCompraId = 3, EstadoDeCompra = "Finalizado"}
         
         );
       }

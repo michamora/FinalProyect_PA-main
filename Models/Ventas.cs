@@ -30,11 +30,16 @@ namespace ProyectoFinal.Models
 
         public bool Estado { get; set; } = true;
 
+        public string EstadoDeLaVenta { get; set; }
+
 
         //-------------------------------------------------------------------------------------
 
         [ForeignKey("PagoId")]
         public virtual Pago Pago { get; set; } 
+
+        [ForeignKey("EstadoVentaId")]
+        public virtual EstadoVenta EstadoVenta { get; set; } 
 
         
         [ForeignKey("VentaId")]
@@ -48,6 +53,7 @@ namespace ProyectoFinal.Models
             SubTotal = 0;
             Total = 0;
             Existencia = 0;
+            EstadoDeLaVenta = "";
 
             ventasDetalle = new List<VentasDetalle>();
         }

@@ -73,7 +73,7 @@
             {
                 @foreach (var item in lista)
                 {
-                        
+                        if(item.Precio < 1){
                     
                      descripcion = categoriaBLL.Buscar(item.CategoriaId);
                     if (descripcion == null) break;
@@ -96,7 +96,7 @@
                         </td>
 
                     </tr>
-                
+                        }
             }
             }
             </tbody>
@@ -105,7 +105,7 @@
 
         <div class="card-header rz-border-radius-4 shadow text-center">
             <h4>
-                Articulos comprados
+                Articulos comprados individualmente
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                 class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
@@ -138,7 +138,7 @@
             @if (lista.Count == 0)
             {
                 <p/>
-                <span>Empty</span>
+                <span class ="bordercantidadcomprada">No hay articulos registrados</span>
             }
             else
             {
